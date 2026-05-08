@@ -1,6 +1,7 @@
 ﻿import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { User, Baby } from 'lucide-react';
 import api from '../api/axios';
 
 export default function LoginPage() {
@@ -48,13 +49,19 @@ export default function LoginPage() {
             <button
               key={p.ID_PERFIL}
               onClick={() => handleSelectPerfil(p)}
-              className="flex flex-col items-center gap-2 group"
+              className="flex flex-col items-center gap-3 group"
             >
-              <div className="w-24 h-24 rounded-lg bg-gray-700 flex items-center justify-center text-4xl
-                              group-hover:ring-4 group-hover:ring-brand transition">
-                {p.TIPO === 'INFANTIL' ? '🧒' : '👤'}
+              <div className="w-24 h-24 rounded-lg bg-gradient-to-br from-gray-700 to-gray-800 
+                              flex items-center justify-center
+                              group-hover:ring-4 group-hover:ring-brand transition-all
+                              group-hover:scale-105">
+                {p.TIPO === 'INFANTIL' ? (
+                  <Baby size={40} className="text-blue-400" strokeWidth={1.5} />
+                ) : (
+                  <User size={40} className="text-gray-300" strokeWidth={1.5} />
+                )}
               </div>
-              <span className="text-gray-300 group-hover:text-white text-sm">{p.NOMBRE}</span>
+              <span className="text-gray-300 group-hover:text-white text-sm font-medium">{p.NOMBRE}</span>
               {p.TIPO === 'INFANTIL' && (
                 <span className="text-xs bg-blue-700 px-2 py-0.5 rounded">Infantil</span>
               )}

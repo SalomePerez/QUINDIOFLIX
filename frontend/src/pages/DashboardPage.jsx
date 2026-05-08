@@ -1,11 +1,14 @@
 ﻿import { useState, useEffect } from 'react';
 import api from '../api/axios';
 import { useAuth } from '../context/AuthContext';
+import { Users, Film, Play, DollarSign, AlertTriangle, Star, Trophy, MapPin, Smartphone, Tablet, Tv, Monitor } from 'lucide-react';
 
-function StatCard({ label, value, icon }) {
+function StatCard({ label, value, icon: Icon }) {
   return (
     <div className="bg-gray-800 rounded-xl p-5">
-      <div className="text-3xl mb-2">{icon}</div>
+      <div className="mb-2">
+        <Icon size={32} className="text-brand" strokeWidth={1.5} />
+      </div>
       <div className="text-2xl font-bold text-white">{value ?? '—'}</div>
       <div className="text-sm text-gray-400 mt-1">{label}</div>
     </div>
@@ -54,19 +57,22 @@ export default function DashboardPage() {
       {/* Stats generales */}
       {stats && (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-10">
-          <StatCard label="Usuarios activos"     value={fmt(stats.USUARIOS_ACTIVOS)}     icon="👥" />
-          <StatCard label="Contenido total"      value={fmt(stats.TOTAL_CONTENIDO)}      icon="🎬" />
-          <StatCard label="Reproducciones"       value={fmt(stats.TOTAL_REPRODUCCIONES)} icon="▶️" />
-          <StatCard label="Ingresos este mes"    value={money(stats.INGRESOS_MES_ACTUAL)} icon="💰" />
-          <StatCard label="Reportes pendientes"  value={fmt(stats.REPORTES_PENDIENTES)}  icon="🚨" />
-          <StatCard label="Calificación global"  value={stats.CALIFICACION_GLOBAL ? `⭐ ${stats.CALIFICACION_GLOBAL}` : '—'} icon="⭐" />
+          <StatCard label="Usuarios activos"     value={fmt(stats.USUARIOS_ACTIVOS)}     icon={Users} />
+          <StatCard label="Contenido total"      value={fmt(stats.TOTAL_CONTENIDO)}      icon={Film} />
+          <StatCard label="Reproducciones"       value={fmt(stats.TOTAL_REPRODUCCIONES)} icon={Play} />
+          <StatCard label="Ingresos este mes"    value={money(stats.INGRESOS_MES_ACTUAL)} icon={DollarSign} />
+          <StatCard label="Reportes pendientes"  value={fmt(stats.REPORTES_PENDIENTES)}  icon={AlertTriangle} />
+          <StatCard label="Calificación global"  value={stats.CALIFICACION_GLOBAL || '—'} icon={Star} />
         </div>
       )}
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
         {/* Top 10 contenido popular */}
         <div className="bg-gray-800 rounded-xl p-6">
-          <h2 className="text-lg font-semibold mb-4">🏆 Top 10 Contenido Más Popular</h2>
+          <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
+            <Trophy size={20} className="text-yellow-400" />
+            Top 10 Contenido Más Popular
+          </h2>
           <div className="space-y-2">
             {popular.map((c, i) => (
               <div key={i} className="flex items-center gap-3 text-sm">
@@ -76,8 +82,14 @@ export default function DashboardPage() {
                   <span className="text-gray-500 text-xs">{c.CATEGORIA} · {c.TIPO}</span>
                 </div>
                 <div className="text-right flex-shrink-0">
-                  <div className="text-brand font-medium">▶ {fmt(c.TOTAL_REPRODUCCIONES)}</div>
-                  <div className="text-yellow-400 text-xs">⭐ {c.CALIFICACION_PROMEDIO ?? '—'}</div>
+                  <div className="text-brand font-medium flex items-center gap-1 justify-end">
+                    <Play size={12} />
+                    {fmt(c.TOTAL_REPRODUCCIONES)}
+                  </div>
+                  <div className="text-yellow-400 text-xs flex items-center gap-1 justify-end">
+                    <Star size={12} className="fill-yellow-400" />
+                    {c.CALIFICACION_PROMEDIO ?? '—'}
+                  </div>
                 </div>
               </div>
             ))}
@@ -86,7 +98,10 @@ export default function DashboardPage() {
 
         {/* Usuarios por ciudad y plan */}
         <div className="bg-gray-800 rounded-xl p-6">
-          <h2 className="text-lg font-semibold mb-4">🏙️ Usuarios Activos por Ciudad y Plan</h2>
+          <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
+            <MapPin size={20} className="text-brand" />
+            Usuarios Activos por Ciudad y Plan
+          </h2>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
@@ -119,16 +134,27 @@ export default function DashboardPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Reproducciones por dispositivo */}
         <div className="bg-gray-800 rounded-xl p-6">
-          <h2 className="text-lg font-semibold mb-4">📱 Reproducciones por Categoría y Dispositivo</h2>
+          <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
+            <Smartphone size={20} className="text-brand" />
+            Reproducciones por Categoría y Dispositivo
+          </h2>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
               <thead>
                 <tr className="text-gray-400 border-b border-gray-700">
                   <th className="text-left py-2">Categoría</th>
-                  <th className="text-right py-2">📱</th>
-                  <th className="text-right py-2">📟</th>
-                  <th className="text-right py-2">📺</th>
-                  <th className="text-right py-2">💻</th>
+                  <th className="text-right py-2 flex items-center justify-end gap-1">
+                    <Smartphone size={14} />
+                  </th>
+                  <th className="text-right py-2">
+                    <Tablet size={14} className="inline" />
+                  </th>
+                  <th className="text-right py-2">
+                    <Tv size={14} className="inline" />
+                  </th>
+                  <th className="text-right py-2">
+                    <Monitor size={14} className="inline" />
+                  </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-700">
@@ -148,7 +174,10 @@ export default function DashboardPage() {
 
         {/* Ingresos mensuales */}
         <div className="bg-gray-800 rounded-xl p-6">
-          <h2 className="text-lg font-semibold mb-4">💰 Ingresos Mensuales 2026</h2>
+          <h2 className="text-lg font-semibold mb-4 flex items-center gap-2">
+            <DollarSign size={20} className="text-green-400" />
+            Ingresos Mensuales 2026
+          </h2>
           <div className="overflow-x-auto max-h-72 overflow-y-auto">
             <table className="w-full text-sm">
               <thead className="sticky top-0 bg-gray-800">
@@ -157,7 +186,7 @@ export default function DashboardPage() {
                   <th className="text-left py-2">Plan</th>
                   <th className="text-right py-2">Mes</th>
                   <th className="text-right py-2">Ingresos</th>
-                  <th className="text-right py-2">Pagos ✓</th>
+                  <th className="text-right py-2">Pagos</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-700">
@@ -178,4 +207,3 @@ export default function DashboardPage() {
     </div>
   );
 }
-

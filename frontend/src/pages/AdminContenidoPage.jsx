@@ -32,9 +32,9 @@ export default function AdminContenidoPage() {
     setMsg('');
     try {
       // Inserción directa vía endpoint (en producción sería un endpoint POST /contenido)
-      setMsg('✅ Funcionalidad de inserción disponible vía SQL directo en Oracle.');
+      setMsg('Funcionalidad de inserción disponible vía SQL directo en Oracle.');
     } catch (err) {
-      setMsg('❌ ' + (err.response?.data?.error || 'Error.'));
+      setMsg(err.response?.data?.error || 'Error.');
     }
   }
 

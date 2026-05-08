@@ -1,4 +1,5 @@
 ﻿import { Link } from 'react-router-dom';
+import { Film, Tv, FileVideo, Music, Mic, Crown, Star, Play } from 'lucide-react';
 
 const BADGE_COLOR = {
   'TP':  'bg-green-700',
@@ -8,21 +9,29 @@ const BADGE_COLOR = {
   '+18': 'bg-red-700',
 };
 
+const iconMap = {
+  PELICULA: Film,
+  SERIE: Tv,
+  DOCUMENTAL: FileVideo,
+  MUSICA: Music,
+  PODCAST: Mic
+};
+
 export default function ContentCard({ contenido }) {
   const { ID_CONTENIDO, TITULO, TIPO, CATEGORIA, CLASIFICACION_EDAD,
           CALIFICACION_PROMEDIO, TOTAL_REPRODUCCIONES, ES_ORIGINAL } = contenido;
+
+  const Icon = iconMap[TIPO] || Film;
 
   return (
     <Link to={`/contenido/${ID_CONTENIDO}`} className="group block">
       <div className="bg-gray-800 rounded-lg overflow-hidden hover:ring-2 hover:ring-brand transition-all duration-200 hover:-translate-y-1">
         {/* Poster placeholder */}
         <div className="h-40 bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center relative">
-          <span className="text-4xl">
-            {TIPO === 'PELICULA' ? '🎬' : TIPO === 'SERIE' ? '📺' :
-             TIPO === 'DOCUMENTAL' ? '🎥' : TIPO === 'MUSICA' ? '🎵' : '🎙️'}
-          </span>
+          <Icon size={48} className="text-gray-400 group-hover:text-brand transition" strokeWidth={1.5} />
           {ES_ORIGINAL === 'S' && (
-            <span className="absolute top-2 left-2 text-xs bg-brand px-2 py-0.5 rounded font-semibold">
+            <span className="absolute top-2 left-2 text-xs bg-brand px-2 py-0.5 rounded font-semibold flex items-center gap-1">
+              <Crown size={12} />
               ORIGINAL
             </span>
           )}
@@ -37,8 +46,14 @@ export default function ContentCard({ contenido }) {
           </h3>
           <p className="text-xs text-gray-400 mt-0.5">{CATEGORIA}</p>
           <div className="flex items-center justify-between mt-2 text-xs text-gray-500">
-            <span>⭐ {CALIFICACION_PROMEDIO ?? '—'}</span>
-            <span>▶ {TOTAL_REPRODUCCIONES ?? 0}</span>
+            <span className="flex items-center gap-1">
+              <Star size={12} className="fill-yellow-400 text-yellow-400" />
+              {CALIFICACION_PROMEDIO ?? '—'}
+            </span>
+            <span className="flex items-center gap-1">
+              <Play size={12} />
+              {TOTAL_REPRODUCCIONES ?? 0}
+            </span>
           </div>
         </div>
       </div>

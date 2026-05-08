@@ -3,6 +3,15 @@ import { useParams } from 'react-router-dom';
 import api from '../api/axios';
 import StarRating from '../components/StarRating';
 import { useAuth } from '../context/AuthContext';
+import { Film, Tv, FileVideo, Music, Mic, Heart, Crown, Play } from 'lucide-react';
+
+const iconMap = {
+  PELICULA: Film,
+  SERIE: Tv,
+  DOCUMENTAL: FileVideo,
+  MUSICA: Music,
+  PODCAST: Mic
+};
 
 export default function ContenidoDetailPage() {
   const { id }          = useParams();
@@ -54,7 +63,7 @@ export default function ContenidoDetailPage() {
     if (!perfil) return setFavMsg('Selecciona un perfil primero.');
     try {
       await api.post(`/contenido/${id}/favorito`, { id_perfil: perfil.ID_PERFIL });
-      setFavMsg('Agregado a favoritos ❤️');
+      setFavMsg('Agregado a favoritos');
     } catch (err) {
       setFavMsg(err.response?.data?.error || 'Error.');
     }
@@ -68,21 +77,24 @@ export default function ContenidoDetailPage() {
   if (!contenido) return <div className="text-center py-20 text-gray-400">Contenido no encontrado.</div>;
 
   const c = contenido;
+  const Icon = iconMap[c.TIPO] || Film;
 
   return (
     <div className="min-h-screen bg-gray-950 text-white">
       {/* Header */}
       <div className="bg-gradient-to-b from-gray-800 to-gray-950 px-6 py-10">
         <div className="max-w-4xl mx-auto flex gap-8">
-          <div className="w-32 h-44 bg-gray-700 rounded-xl flex items-center justify-center text-5xl flex-shrink-0">
-            {c.TIPO === 'PELICULA' ? '🎬' : c.TIPO === 'SERIE' ? '📺' :
-             c.TIPO === 'DOCUMENTAL' ? '🎥' : c.TIPO === 'MUSICA' ? '🎵' : '🎙️'}
+          <div className="w-32 h-44 bg-gradient-to-br from-gray-700 to-gray-900 rounded-xl flex items-center justify-center flex-shrink-0">
+            <Icon size={64} className="text-gray-400" strokeWidth={1.5} />
           </div>
           <div className="flex-1">
             <div className="flex items-center gap-3 mb-2">
               <h1 className="text-3xl font-bold">{c.TITULO}</h1>
               {c.ES_ORIGINAL === 'S' && (
-                <span className="text-xs bg-brand px-2 py-1 rounded font-semibold">ORIGINAL</span>
+                <span className="text-xs bg-brand px-2 py-1 rounded font-semibold flex items-center gap-1">
+                  <Crown size={12} />
+                  ORIGINAL
+                </span>
               )}
             </div>
             <div className="flex flex-wrap gap-2 text-sm text-gray-400 mb-3">
@@ -108,8 +120,9 @@ export default function ContenidoDetailPage() {
             </div>
             <div className="flex gap-3">
               <button onClick={handleFavorito}
-                className="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg text-sm transition">
-                ❤️ Favorito
+                className="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg text-sm transition flex items-center gap-2">
+                <Heart size={16} />
+                Favorito
               </button>
               {favMsg && <span className="text-sm text-green-400 self-center">{favMsg}</span>}
             </div>
