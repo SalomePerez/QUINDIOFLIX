@@ -45,6 +45,10 @@ router.post('/register', async (req, res, next) => {
   } catch (err) {
     if (err.message && err.message.includes('20001'))
       return res.status(409).json({ error: 'El email ya está registrado.' });
+    if (err.errorNum === 650 || err.message?.includes('PLS-00201'))
+      return res.status(500).json({
+        error: 'Procedimiento SP_REGISTRAR_USUARIO no encontrado. Ejecuta el script 04_nucleo2_plsql/09_procedimientos.sql en la base de datos y reinicia el backend.'
+      });
     next(err);
   }
 });

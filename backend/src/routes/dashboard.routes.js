@@ -3,6 +3,15 @@ const router  = express.Router();
 const db      = require('../config/database');
 const { authMiddleware } = require('../middleware/auth.middleware');
 
+function handleDashboardError(err, res, next, viewName) {
+  if (err.message && err.message.includes('ORA-00942')) {
+    return res.status(500).json({
+      error: `No se encontró la vista materializada ${viewName}. Ejecuta 03_nucleo1_consultas/07_vistas_materializadas.sql y vuelve a intentar.`
+    });
+  }
+  next(err);
+}
+
 // GET /api/dashboard/popular — top contenido más popular (usa vista materializada)
 router.get('/popular', async (_req, res, next) => {
   try {
@@ -14,7 +23,7 @@ router.get('/popular', async (_req, res, next) => {
        FETCH FIRST 10 ROWS ONLY`
     );
     res.json(result.rows);
-  } catch (err) { next(err); }
+  } catch (err) { handleDashboardError(err, res, next, 'MV_POPULARIDAD_CONTENIDO'); }
 });
 
 // GET /api/dashboard/ingresos — ingresos mensuales (usa vista materializada)
@@ -30,7 +39,7 @@ router.get('/ingresos', authMiddleware, async (req, res, next) => {
       [Number(anio)]
     );
     res.json(result.rows);
-  } catch (err) { next(err); }
+  } catch (err) { handleDashboardError(err, res, next, 'MV_INGRESOS_MENSUALES'); }
 });
 
 // GET /api/dashboard/reproducciones-por-dispositivo — PIVOT dispositivos

@@ -202,7 +202,7 @@ CREATE TABLE USUARIOS (
     CONSTRAINT fk_usu_ref  FOREIGN KEY (id_referidor) REFERENCES USUARIOS(id_usuario),
     CONSTRAINT chk_usu_estado    CHECK (estado_cuenta IN ('ACTIVO','INACTIVO','SUSPENDIDO')),
     CONSTRAINT chk_usu_mod       CHECK (es_moderador IN ('S','N')),
-    CONSTRAINT chk_usu_edad      CHECK (fecha_nacimiento < SYSDATE - 13*365)
+    CONSTRAINT chk_usu_edad      CHECK (fecha_nacimiento < DATE '2013-01-01')
 );
 COMMENT ON TABLE  USUARIOS IS 'Usuarios registrados en la plataforma';
 COMMENT ON COLUMN USUARIOS.estado_cuenta     IS 'ACTIVO, INACTIVO (mora >30 días) o SUSPENDIDO';
@@ -252,7 +252,7 @@ PARTITION BY RANGE (fecha_hora_inicio) (
     PARTITION reprod_2024    VALUES LESS THAN (TIMESTAMP '2025-01-01 00:00:00') TABLESPACE TBS_REPROD_2024,
     PARTITION reprod_2025    VALUES LESS THAN (TIMESTAMP '2026-01-01 00:00:00') TABLESPACE TBS_REPROD_2025,
     PARTITION reprod_2026    VALUES LESS THAN (TIMESTAMP '2027-01-01 00:00:00') TABLESPACE TBS_REPROD_2026,
-    PARTITION reprod_futuro  VALUES LESS THAN (MAXVALUE)                        TABLESPACE TBS_REPROD_FUTURO
+    PARTITION reprod_futuro  VALUES LESS THAN (MAXVALUE) TABLESPACE TBS_REPROD_FUTURO
 );
 COMMENT ON TABLE  REPRODUCCIONES IS 'Registro de cada reproducción de contenido por perfil. Particionada por año.';
 COMMENT ON COLUMN REPRODUCCIONES.id_episodio       IS 'NULL para películas/documentales/música. Obligatorio para series/podcasts.';
@@ -348,3 +348,7 @@ CREATE TABLE HISTORIAL_PLANES (
 COMMENT ON TABLE HISTORIAL_PLANES IS 'Registro histórico de cambios de plan de suscripción';
 
 COMMIT;
+
+-- Aca nos mostria 19 tablas
+SELECT table_name FROM user_tables ORDER BY table_name;
+

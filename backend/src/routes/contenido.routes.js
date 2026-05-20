@@ -101,6 +101,22 @@ router.get('/:id/calificaciones', async (req, res, next) => {
 router.post('/:id/calificar', authMiddleware, async (req, res, next) => {
   const { id_perfil, estrellas, resena } = req.body;
   if (!id_perfil || !estrellas) return res.status(400).json({ error: 'id_perfil y estrellas son requeridos.' });
+  // Verificar progreso mínimo antes de intentar insertar (mejor UX / control)
+  try {
+    const prog = await db.execute(
+      `SELECT MAX(porcentaje_avance) AS max_av
+       FROM REPRODUCCIONES
+       WHERE id_perfil = :p AND id_contenido = :c`,
+      { p: Number(id_perfil), c: Number(req.params.id) }
+    );
+    const maxAv = prog.rows && prog.rows[0] ? (prog.rows[0].MAX_AV ?? prog.rows[0].MAX_AV) : null;
+    if (maxAv === null || maxAv === undefined || Number(maxAv) < 50) {
+      return res.status(400).json({ error: 'Debes reproducir al menos el 50% del contenido para calificar.' });
+    }
+  } catch (err) {
+    // Si falla la verificación, registramos y dejamos que el trigger DB lo valide
+    console.error('Error verificando reproducciones antes de calificar:', err.message || err);
+  }
   try {
     await db.execute(
       `INSERT INTO CALIFICACIONES (id_perfil, id_contenido, estrellas, resena)

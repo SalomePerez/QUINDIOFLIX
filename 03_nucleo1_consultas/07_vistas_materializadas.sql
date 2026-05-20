@@ -30,8 +30,7 @@ SELECT
     ROUND(AVG(cal.estrellas), 2)                AS calificacion_promedio,
     MIN(cal.estrellas)                          AS calificacion_minima,
     MAX(cal.estrellas)                          AS calificacion_maxima,
-    COUNT(fav.id_perfil)                        AS veces_en_favoritos,
-    SYSDATE                                     AS fecha_actualizacion
+    COUNT(fav.id_perfil)                        AS veces_en_favoritos
 FROM CONTENIDO c
 JOIN CATEGORIAS cat ON c.id_categoria = cat.id_categoria
 LEFT JOIN REPRODUCCIONES r   ON c.id_contenido = r.id_contenido
@@ -78,8 +77,7 @@ SELECT
     SUM(CASE WHEN pg.estado_pago = 'EXITOSO'       THEN pg.monto ELSE 0 END) AS ingresos_netos,
     SUM(CASE WHEN pg.estado_pago = 'REEMBOLSADO'   THEN pg.monto ELSE 0 END) AS reembolsos,
     SUM(pg.monto)                               AS ingresos_brutos,
-    ROUND(AVG(CASE WHEN pg.estado_pago = 'EXITOSO' THEN pg.monto END), 2) AS ticket_promedio,
-    SYSDATE                                     AS fecha_actualizacion
+    ROUND(AVG(CASE WHEN pg.estado_pago = 'EXITOSO' THEN pg.monto END), 2) AS ticket_promedio
 FROM PAGOS    pg
 JOIN USUARIOS u  ON pg.id_usuario = u.id_usuario
 JOIN PLANES   pl ON u.id_plan     = pl.id_plan

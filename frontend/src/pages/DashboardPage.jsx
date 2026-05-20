@@ -23,6 +23,7 @@ export default function DashboardPage() {
   const [ciudades,    setCiudades]    = useState([]);
   const [ingresos,    setIngresos]    = useState([]);
   const [loading,     setLoading]     = useState(true);
+  const [error,       setError]       = useState(null);
 
   useEffect(() => {
     Promise.all([
@@ -37,13 +38,25 @@ export default function DashboardPage() {
       setDispositivos(d.data);
       setCiudades(c.data);
       setIngresos(i.data);
-    }).catch(console.error)
-      .finally(() => setLoading(false));
+    }).catch(err => {
+      console.error(err);
+      setError(err.response?.data?.error || 'Error al cargar el dashboard.');
+    }).finally(() => setLoading(false));
   }, []);
 
   if (loading) return (
     <div className="min-h-screen bg-gray-950 flex items-center justify-center">
       <div className="w-10 h-10 border-4 border-brand border-t-transparent rounded-full animate-spin" />
+    </div>
+  );
+
+  if (error) return (
+    <div className="min-h-screen bg-gray-950 flex items-center justify-center px-6 text-center">
+      <div className="bg-gray-800 p-8 rounded-3xl border border-red-500 max-w-xl">
+        <h1 className="text-2xl font-semibold text-white mb-4">Error al cargar el dashboard</h1>
+        <p className="text-gray-300 mb-4">{error}</p>
+        <p className="text-sm text-gray-500">Revisa que las vistas materializadas del dashboard existan y estén actualizadas.</p>
+      </div>
     </div>
   );
 

@@ -1,4 +1,8 @@
-﻿const oracledb = require('oracledb');
+﻿const util = require('util');
+if (!util.isDate && util.types?.isDate) {
+  util.isDate = util.types.isDate;
+}
+const oracledb = require('oracledb');
 
 oracledb.outFormat = oracledb.OUT_FORMAT_OBJECT;
 oracledb.autoCommit = false;

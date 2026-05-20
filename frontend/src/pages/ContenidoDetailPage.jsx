@@ -22,6 +22,9 @@ export default function ContenidoDetailPage() {
   const [miEstrellas,   setMiEstrellas]   = useState(0);
   const [miResena,      setMiResena]      = useState('');
   const [calMsg,        setCalMsg]        = useState('');
+  const [porcentajeAvance, setPorcentajeAvance] = useState(0);
+  const [reproId, setReproId] = useState(null);
+  const [playingMsg, setPlayingMsg] = useState('');
   const [favMsg,        setFavMsg]        = useState('');
   const [tempActiva,    setTempActiva]    = useState(null);
   const [episodios,     setEpisodios]     = useState([]);
@@ -37,6 +40,27 @@ export default function ContenidoDetailPage() {
     }).finally(() => setLoading(false));
   }, [id]);
 
+  // cargar progreso de reproducción del perfil para este contenido
+  useEffect(() => {
+    async function loadProgreso() {
+      if (!contenido || !perfil) return;
+      try {
+        const { data } = await api.get(`/reproducciones/perfil/${perfil.ID_PERFIL}`);
+        const match = data.find(r => r.TITULO === contenido.TITULO || r.TITULO === contenido.TITULO);
+        if (match) {
+          setPorcentajeAvance(Number(match.PORCENTAJE_AVANCE || 0));
+          setReproId(match.ID_REPRODUCCION || match.id_reproduccion);
+        } else {
+          setPorcentajeAvance(0);
+          setReproId(null);
+        }
+      } catch (err) {
+        // no bloquear la página por este fallo
+      }
+    }
+    loadProgreso();
+  }, [contenido, perfil]);
+
   async function loadEpisodios(idTemp) {
     if (tempActiva === idTemp) { setTempActiva(null); return; }
     const { data } = await api.get(`/contenido/${id}/episodios/${idTemp}`);
@@ -47,6 +71,7 @@ export default function ContenidoDetailPage() {
   async function handleCalificar(e) {
     e.preventDefault();
     if (!perfil) return setCalMsg('Selecciona un perfil primero.');
+    if (porcentajeAvance < 50) return setCalMsg('Debes reproducir al menos el 50% antes de calificar.');
     try {
       await api.post(`/contenido/${id}/calificar`, {
         id_perfil: perfil.ID_PERFIL, estrellas: miEstrellas, resena: miResena
@@ -55,7 +80,23 @@ export default function ContenidoDetailPage() {
       const { data } = await api.get(`/contenido/${id}/calificaciones`);
       setCalificaciones(data);
     } catch (err) {
-      setCalMsg(err.response?.data?.error || 'Error al calificar.');
+      const errorMessage = err.response?.data?.error || 'Error al calificar.';
+      setCalMsg(errorMessage);
+    }
+  }
+
+  async function handleReproducirAhora() {
+    if (!perfil) return setPlayingMsg('Selecciona un perfil primero.');
+    setPlayingMsg('Iniciando reproducción...');
+    try {
+      const { data } = await api.post('/reproducciones', { id_perfil: perfil.ID_PERFIL, id_contenido: id, dispositivo: 'TV' });
+      const idr = Array.isArray(data.id_reproduccion) ? data.id_reproduccion[0] : data.id_reproduccion;
+      setReproId(idr);
+      await api.put(`/reproducciones/${idr}`, { porcentaje_avance: 100, finalizar: true });
+      setPorcentajeAvance(100);
+      setPlayingMsg('Reproducción simulada (100%). Ya puedes calificar.');
+    } catch (err) {
+      setPlayingMsg(err.response?.data?.error || 'Error al iniciar reproducción.');
     }
   }
 
@@ -180,7 +221,16 @@ export default function ContenidoDetailPage() {
         <section className="bg-gray-800 rounded-xl p-6">
           <h2 className="text-xl font-semibold mb-4">Calificar</h2>
           <form onSubmit={handleCalificar} className="space-y-4">
-            <StarRating value={miEstrellas} onChange={setMiEstrellas} size="lg" />
+            {porcentajeAvance < 50 && (
+              <div className="text-sm text-yellow-300">
+                Debes reproducir al menos el 50% para calificar.
+                <button type="button" onClick={handleReproducirAhora} className="ml-3 bg-brand px-3 py-1 rounded text-sm">
+                  Reproducir ahora
+                </button>
+                {playingMsg && <span className="ml-3 text-sm text-green-400">{playingMsg}</span>}
+              </div>
+            )}
+            <StarRating value={miEstrellas} onChange={setMiEstrellas} size="lg" readonly={porcentajeAvance < 50} />
             <textarea
               value={miResena}
               onChange={e => setMiResena(e.target.value)}
@@ -189,8 +239,8 @@ export default function ContenidoDetailPage() {
               className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-white
                          placeholder-gray-500 focus:outline-none focus:border-brand resize-none"
             />
-            {calMsg && <p className={`text-sm ${calMsg.includes('Error') || calMsg.includes('50%') ? 'text-red-400' : 'text-green-400'}`}>{calMsg}</p>}
-            <button type="submit" disabled={!miEstrellas}
+            {calMsg && <p className={`text-sm ${/Error|50%|Ya calificaste/i.test(calMsg) ? 'text-red-400' : 'text-green-400'}`}>{calMsg}</p>}
+            <button type="submit" disabled={!miEstrellas || porcentajeAvance < 50}
               className="bg-brand hover:bg-brand-dark text-white px-6 py-2 rounded-lg text-sm
                          transition disabled:opacity-40">
               Enviar calificación
