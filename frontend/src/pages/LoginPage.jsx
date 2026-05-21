@@ -1,76 +1,37 @@
-﻿import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+﻿import { useState, useEffect } from 'react';
+import { useNavigate, Link, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { User, Baby } from 'lucide-react';
-import api from '../api/axios';
 
 export default function LoginPage() {
-  const { login, selectPerfil } = useAuth();
+  const { login } = useAuth();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [email,    setEmail]    = useState('');
   const [password, setPassword] = useState('');
   const [error,    setError]    = useState('');
+  const [success,  setSuccess]  = useState('');
   const [loading,  setLoading]  = useState(false);
-  const [perfiles, setPerfiles] = useState(null);
-  const [userId,   setUserId]   = useState(null);
+
+  useEffect(() => {
+    if (searchParams.get('registered') === 'true') {
+      setSuccess('¡Cuenta creada exitosamente! Ahora inicia sesión.');
+    }
+  }, [searchParams]);
 
   async function handleLogin(e) {
     e.preventDefault();
     setError('');
+    setSuccess('');
     setLoading(true);
     try {
-      const user = await login(email, password);
-      setUserId(user.ID_USUARIO);
-      // Cargar perfiles
-      const { data } = await api.get(`/auth/perfiles/${user.ID_USUARIO}`);
-      if (data.length === 1) {
-        selectPerfil(data[0]);
-        navigate('/');
-      } else {
-        setPerfiles(data);
-      }
+      await login(email, password);
+      // Redirigir a la página de perfiles para que seleccione o cree uno
+      navigate('/perfiles');
     } catch (err) {
       setError(err.response?.data?.error || 'Error al iniciar sesión.');
     } finally {
       setLoading(false);
     }
-  }
-
-  function handleSelectPerfil(p) {
-    selectPerfil(p);
-    navigate('/');
-  }
-
-  if (perfiles) {
-    return (
-      <div className="min-h-screen bg-gray-950 flex flex-col items-center justify-center p-4">
-        <h2 className="text-2xl font-bold mb-8 text-white">¿Quién está viendo?</h2>
-        <div className="flex flex-wrap gap-6 justify-center">
-          {perfiles.map(p => (
-            <button
-              key={p.ID_PERFIL}
-              onClick={() => handleSelectPerfil(p)}
-              className="flex flex-col items-center gap-3 group"
-            >
-              <div className="w-24 h-24 rounded-lg bg-gradient-to-br from-gray-700 to-gray-800 
-                              flex items-center justify-center
-                              group-hover:ring-4 group-hover:ring-brand transition-all
-                              group-hover:scale-105">
-                {p.TIPO === 'INFANTIL' ? (
-                  <Baby size={40} className="text-blue-400" strokeWidth={1.5} />
-                ) : (
-                  <User size={40} className="text-gray-300" strokeWidth={1.5} />
-                )}
-              </div>
-              <span className="text-gray-300 group-hover:text-white text-sm font-medium">{p.NOMBRE}</span>
-              {p.TIPO === 'INFANTIL' && (
-                <span className="text-xs bg-blue-700 px-2 py-0.5 rounded">Infantil</span>
-              )}
-            </button>
-          ))}
-        </div>
-      </div>
-    );
   }
 
   return (
@@ -107,6 +68,7 @@ export default function LoginPage() {
           </div>
 
           {error && <p className="text-red-400 text-sm">{error}</p>}
+          {success && <p className="text-green-400 text-sm">{success}</p>}
 
           <button
             type="submit"

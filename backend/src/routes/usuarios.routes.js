@@ -143,5 +143,19 @@ router.get('/:id/reporte-consumo', authMiddleware, async (req, res, next) => {
   } catch (err) { next(err); }
 });
 
+// GET /api/usuarios/:id/referidos — usuarios referidos por este usuario
+router.get('/:id/referidos', authMiddleware, async (req, res, next) => {
+  try {
+    const result = await db.execute(
+      `SELECT id_usuario, nombre, apellido, email, ciudad, fecha_registro, estado_cuenta
+       FROM USUARIOS
+       WHERE id_referidor = :id
+       ORDER BY fecha_registro DESC`,
+      [Number(req.params.id)]
+    );
+    res.json(result.rows);
+  } catch (err) { next(err); }
+});
+
 module.exports = router;
 

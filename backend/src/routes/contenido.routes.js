@@ -45,7 +45,8 @@ router.get('/:id', async (req, res, next) => {
         `SELECT c.*, cat.nombre AS categoria,
                 e.nombre AS empleado_responsable,
                 (SELECT ROUND(AVG(estrellas),1) FROM CALIFICACIONES WHERE id_contenido=c.id_contenido) AS calificacion_promedio,
-                (SELECT COUNT(*) FROM REPRODUCCIONES WHERE id_contenido=c.id_contenido) AS total_reproducciones
+                (SELECT COUNT(*) FROM REPRODUCCIONES WHERE id_contenido=c.id_contenido) AS total_reproducciones,
+                (SELECT COUNT(*) FROM CALIFICACIONES WHERE id_contenido=c.id_contenido) AS total_calificaciones
          FROM CONTENIDO c
          JOIN CATEGORIAS cat ON c.id_categoria=cat.id_categoria
          JOIN EMPLEADOS  e   ON c.id_empleado_resp=e.id_empleado
@@ -66,9 +67,9 @@ router.get('/:id', async (req, res, next) => {
     if (!contRes.rows.length) return res.status(404).json({ error: 'Contenido no encontrado.' });
     res.json({
       ...contRes.rows[0],
-      generos:    genRes.rows.map(r => r.NOMBRE),
-      temporadas: tempRes.rows,
-      relacionados: relRes.rows
+      GENEROS:    genRes.rows.map(r => r.NOMBRE),
+      TEMPORADAS: tempRes.rows,
+      RELACIONADOS: relRes.rows
     });
   } catch (err) { next(err); }
 });

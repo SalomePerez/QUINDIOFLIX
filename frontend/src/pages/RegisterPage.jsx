@@ -46,7 +46,8 @@ export default function RegisterPage() {
         id_plan: Number(form.id_plan),
         id_referidor: form.id_referidor ? Number(form.id_referidor) : undefined
       });
-      navigate('/login');
+      // Redirigir al login con mensaje de éxito
+      navigate('/login?registered=true');
     } catch (err) {
       setError(err.response?.data?.error || 'Error al registrarse.');
     } finally {
@@ -133,18 +134,25 @@ export default function RegisterPage() {
                 >
                   <div className="font-semibold text-sm">{p.nombre}</div>
                   <div className="text-xs mt-1">{p.precio}</div>
-                  <div className="text-xs text-gray-500">{p.calidad} · {p.perfiles} perfiles</div>
+                  <div className="text-xs text-gray-500">{p.pantallas} pantalla{p.pantallas > 1 ? 's' : ''} · {p.calidad}</div>
+                  <div className="text-xs text-gray-400 mt-0.5">Hasta {p.perfiles} perfiles</div>
                 </button>
               ))}
             </div>
           </div>
 
           <div>
-            <label className="block text-sm text-gray-400 mb-1">ID de quien te refirió (opcional)</label>
+            <label className="block text-sm text-gray-400 mb-1">
+              Código de referido (opcional)
+              <span className="ml-2 text-xs text-gray-500">¿Te invitó un amigo?</span>
+            </label>
             <input name="id_referidor" type="number" value={form.id_referidor} onChange={handleChange}
-              placeholder="Ej: 5"
+              placeholder="Ingresa el código de tu amigo"
               className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white
                          focus:outline-none focus:border-brand" />
+            <p className="text-xs text-gray-500 mt-1">
+              Si un amigo te invitó, ingresa su código aquí. Ambos recibirán 10% de descuento.
+            </p>
           </div>
 
           {error && <p className="text-red-400 text-sm">{error}</p>}

@@ -101,5 +101,77 @@ router.get('/perfiles/:id_usuario', async (req, res, next) => {
   } catch (err) { next(err); }
 });
 
+// POST /api/auth/perfiles — crear nuevo perfil
+router.post('/perfiles', async (req, res, next) => {
+  const { id_usuario, nombre, tipo, avatar } = req.body;
+  if (!id_usuario || !nombre) {
+    return res.status(400).json({ error: 'id_usuario y nombre son requeridos.' });
+  }
+  
+  try {
+    // Verificar límite de perfiles según el plan
+    const userResult = await db.execute(
+      `SELECT p.max_perfiles 
+       FROM USUARIOS u 
+       JOIN PLANES p ON u.id_plan = p.id_plan 
+       WHERE u.id_usuario = :id`,
+      [Number(id_usuario)]
+    );
+    
+    if (!userResult.rows.length) {
+      return res.status(404).json({ error: 'Usuario no encontrado.' });
+    }
+    
+    const maxPerfiles = userResult.rows[0].MAX_PERFILES;
+    
+    // Contar perfiles activos actuales
+    const countResult = await db.execute(
+      `SELECT COUNT(*) AS total FROM PERFILES WHERE id_usuario = :id AND activo = 'S'`,
+      [Number(id_usuario)]
+    );
+    
+    const currentCount = countResult.rows[0].TOTAL;
+    
+    if (currentCount >= maxPerfiles) {
+      return res.status(400).json({ 
+        error: `Has alcanzado el límite de ${maxPerfiles} perfiles para tu plan.` 
+      });
+    }
+    
+    // Crear el perfil
+    await db.execute(
+      `INSERT INTO PERFILES (id_usuario, nombre, avatar, tipo, activo)
+       VALUES (:id_usuario, :nombre, :avatar, :tipo, 'S')`,
+      {
+        id_usuario: Number(id_usuario),
+        nombre,
+        avatar: avatar || 'avatar_default.png',
+        tipo: tipo || 'ADULTO'
+      },
+      { autoCommit: true }
+    );
+    
+    res.status(201).json({ message: 'Perfil creado exitosamente.' });
+  } catch (err) {
+    console.error('Error al crear perfil:', err);
+    res.status(500).json({ error: 'Error al crear perfil: ' + err.message });
+  }
+});
+
+// DELETE /api/auth/perfiles/:id_perfil — eliminar perfil (eliminación lógica)
+router.delete('/perfiles/:id_perfil', async (req, res, next) => {
+  try {
+    await db.execute(
+      `UPDATE PERFILES SET activo = 'N' WHERE id_perfil = :id`,
+      [Number(req.params.id_perfil)],
+      { autoCommit: true }
+    );
+    res.json({ message: 'Perfil eliminado exitosamente.' });
+  } catch (err) {
+    console.error('Error al eliminar perfil:', err);
+    res.status(500).json({ error: 'Error al eliminar perfil: ' + err.message });
+  }
+});
+
 module.exports = router;
 
