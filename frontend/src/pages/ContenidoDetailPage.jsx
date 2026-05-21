@@ -154,11 +154,18 @@ export default function ContenidoDetailPage() {
               </span>
             </div>
             <p className="text-gray-300 text-sm leading-relaxed mb-4">{c.SINOPSIS}</p>
-            <div className="flex flex-wrap gap-2 mb-4">
-              {(c.GENEROS || []).map(g => (
-                <span key={g} className="text-xs bg-gray-700 px-3 py-1 rounded-full">{g}</span>
-              ))}
-            </div>
+            {(c.generos && c.generos.length > 0) && (
+              <div className="mb-4">
+                <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2">Géneros</h3>
+                <div className="flex flex-wrap gap-2">
+                  {c.generos.map(g => (
+                    <span key={g} className="text-sm bg-gradient-to-r from-brand/20 to-purple-600/20 border border-brand/40 text-white px-3 py-1.5 rounded-lg font-medium">
+                      {g}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
             <div className="flex gap-3">
               <button onClick={handleFavorito}
                 className="bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg text-sm transition flex items-center gap-2">

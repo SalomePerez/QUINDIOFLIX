@@ -11,7 +11,7 @@ const PLANES = [
 export default function RegisterPage() {
   const navigate = useNavigate();
   const [form, setForm] = useState({
-    nombre: '', apellido: '', email: '', telefono: '',
+    nombre: '', apellido: '', email: '', password: '', confirmPassword: '', telefono: '',
     fecha_nacimiento: '', ciudad: '', id_plan: 2, id_referidor: ''
   });
   const [error,   setError]   = useState('');
@@ -24,10 +24,25 @@ export default function RegisterPage() {
   async function handleSubmit(e) {
     e.preventDefault();
     setError('');
+    
+    // Validar contraseñas
+    if (form.password.length < 6) {
+      return setError('La contraseña debe tener al menos 6 caracteres.');
+    }
+    if (form.password !== form.confirmPassword) {
+      return setError('Las contraseñas no coinciden.');
+    }
+    
     setLoading(true);
     try {
       await api.post('/auth/register', {
-        ...form,
+        nombre: form.nombre,
+        apellido: form.apellido,
+        email: form.email,
+        password: form.password,
+        telefono: form.telefono || undefined,
+        fecha_nacimiento: form.fecha_nacimiento,
+        ciudad: form.ciudad,
         id_plan: Number(form.id_plan),
         id_referidor: form.id_referidor ? Number(form.id_referidor) : undefined
       });
@@ -62,6 +77,23 @@ export default function RegisterPage() {
             <input name="email" type="email" value={form.email} onChange={handleChange} required
               className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white
                          focus:outline-none focus:border-brand" />
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm text-gray-400 mb-1">Contraseña</label>
+              <input name="password" type="password" value={form.password} onChange={handleChange} required
+                placeholder="Mínimo 6 caracteres"
+                className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white
+                           focus:outline-none focus:border-brand" />
+            </div>
+            <div>
+              <label className="block text-sm text-gray-400 mb-1">Confirmar contraseña</label>
+              <input name="confirmPassword" type="password" value={form.confirmPassword} onChange={handleChange} required
+                placeholder="Repite la contraseña"
+                className="w-full bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-white
+                           focus:outline-none focus:border-brand" />
+            </div>
           </div>
 
           <div className="grid grid-cols-2 gap-4">

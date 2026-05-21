@@ -8,6 +8,7 @@ export default function LoginPage() {
   const { login, selectPerfil } = useAuth();
   const navigate = useNavigate();
   const [email,    setEmail]    = useState('');
+  const [password, setPassword] = useState('');
   const [error,    setError]    = useState('');
   const [loading,  setLoading]  = useState(false);
   const [perfiles, setPerfiles] = useState(null);
@@ -18,7 +19,7 @@ export default function LoginPage() {
     setError('');
     setLoading(true);
     try {
-      const user = await login(email);
+      const user = await login(email, password);
       setUserId(user.ID_USUARIO);
       // Cargar perfiles
       const { data } = await api.get(`/auth/perfiles/${user.ID_USUARIO}`);
@@ -87,6 +88,19 @@ export default function LoginPage() {
               onChange={e => setEmail(e.target.value)}
               required
               placeholder="tu@email.com"
+              className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2.5
+                         text-white placeholder-gray-500 focus:outline-none focus:border-brand"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm text-gray-400 mb-1">Contraseña</label>
+            <input
+              type="password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              required
+              placeholder="••••••••"
               className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2.5
                          text-white placeholder-gray-500 focus:outline-none focus:border-brand"
             />

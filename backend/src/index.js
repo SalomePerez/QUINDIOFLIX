@@ -7,6 +7,7 @@ const contenidoRoutes     = require('./routes/contenido.routes');
 const usuariosRoutes      = require('./routes/usuarios.routes');
 const reproduccionesRoutes = require('./routes/reproducciones.routes');
 const dashboardRoutes     = require('./routes/dashboard.routes');
+const adminRoutes         = require('./routes/admin.routes');
 
 const app  = express();
 const PORT = process.env.PORT || 3001;
@@ -20,6 +21,7 @@ app.use('/api/contenido',      contenidoRoutes);
 app.use('/api/usuarios',       usuariosRoutes);
 app.use('/api/reproducciones', reproduccionesRoutes);
 app.use('/api/dashboard',      dashboardRoutes);
+app.use('/api/admin',          adminRoutes);
 
 // Health check
 app.get('/api/health', (_req, res) => res.json({ status: 'ok', timestamp: new Date() }));

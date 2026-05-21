@@ -18,8 +18,8 @@ export function AuthProvider({ children }) {
     setLoading(false);
   }, []);
 
-  async function login(email) {
-    const { data } = await api.post('/auth/login', { email });
+  async function login(email, password) {
+    const { data } = await api.post('/auth/login', { email, password });
     setUser(data.user);
     localStorage.setItem('qf_session', JSON.stringify({ user: data.user, perfil: null }));
     return data.user;
