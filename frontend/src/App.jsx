@@ -11,6 +11,7 @@ import ContenidoDetailPage from './pages/ContenidoDetailPage';
 import DashboardPage     from './pages/DashboardPage';
 import AdminContenidoPage from './pages/AdminContenidoPage';
 import ModeracionPage    from './pages/ModeracionPage';
+import PagosPage         from './pages/PagosPage';
 
 function PrivateRoute({ children }) {
   const { user } = useAuth();
@@ -27,6 +28,7 @@ export default function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/perfiles" element={<PrivateRoute><PerfilesPage /></PrivateRoute>} />
           <Route path="/referidos" element={<PrivateRoute><ReferidosPage /></PrivateRoute>} />
+          <Route path="/pagos" element={<PrivateRoute><PagosPage /></PrivateRoute>} />
           <Route path="/favoritos" element={<PrivateRoute><FavoritosPage /></PrivateRoute>} />
           <Route path="/moderacion" element={<PrivateRoute><ModeracionPage /></PrivateRoute>} />
           <Route path="/" element={<PrivateRoute><HomePage /></PrivateRoute>} />

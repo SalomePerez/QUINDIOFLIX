@@ -17,6 +17,7 @@ function StatCard({ label, value, icon: Icon }) {
 
 export default function DashboardPage() {
   const { user } = useAuth();
+  const isModerador = user?.ES_MODERADOR === 'S';
   const [stats,       setStats]       = useState(null);
   const [popular,     setPopular]     = useState([]);
   const [dispositivos,setDispositivos]= useState([]);
@@ -26,6 +27,11 @@ export default function DashboardPage() {
   const [error,       setError]       = useState(null);
 
   useEffect(() => {
+    if (!isModerador) {
+      setLoading(false);
+      return;
+    }
+
     Promise.all([
       api.get('/dashboard/stats'),
       api.get('/dashboard/popular'),
@@ -42,11 +48,21 @@ export default function DashboardPage() {
       console.error(err);
       setError(err.response?.data?.error || 'Error al cargar el dashboard.');
     }).finally(() => setLoading(false));
-  }, []);
+  }, [isModerador]);
 
   if (loading) return (
     <div className="min-h-screen bg-gray-950 flex items-center justify-center">
       <div className="w-10 h-10 border-4 border-brand border-t-transparent rounded-full animate-spin" />
+    </div>
+  );
+
+  if (!isModerador) return (
+    <div className="min-h-screen bg-gray-950 flex items-center justify-center px-6 text-center">
+      <div className="bg-gray-800 p-8 rounded-3xl border border-gray-700 max-w-xl">
+        <h1 className="text-2xl font-semibold text-white mb-4">Acceso denegado</h1>
+        <p className="text-gray-300 mb-4">Este panel está disponible solo para usuarios con rol de moderador/administrador.</p>
+        <p className="text-sm text-gray-500">Si crees que deberías tener acceso, contacta al administrador del sistema.</p>
+      </div>
     </div>
   );
 
@@ -55,7 +71,7 @@ export default function DashboardPage() {
       <div className="bg-gray-800 p-8 rounded-3xl border border-red-500 max-w-xl">
         <h1 className="text-2xl font-semibold text-white mb-4">Error al cargar el dashboard</h1>
         <p className="text-gray-300 mb-4">{error}</p>
-        <p className="text-sm text-gray-500">Revisa que las vistas materializadas del dashboard existan y estén actualizadas.</p>
+        <p className="text-sm text-gray-500">Verifica que el backend esté reiniciado y que el servidor use la versión actualizada del dashboard.</p>
       </div>
     </div>
   );

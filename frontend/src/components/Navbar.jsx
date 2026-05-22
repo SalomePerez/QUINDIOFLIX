@@ -1,7 +1,7 @@
 ﻿import { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { User, LogOut, Home, LayoutDashboard, Shield, Users, Gift, Flag, Heart, ChevronDown } from 'lucide-react';
+import { User, LogOut, Home, LayoutDashboard, Shield, Users, Gift, Flag, Heart, CreditCard, ChevronDown } from 'lucide-react';
 
 export default function Navbar() {
   const { user, perfil, logout } = useAuth();
@@ -37,16 +37,20 @@ export default function Navbar() {
             <Home size={16} />
             Inicio
           </Link>
-          <Link to="/dashboard" className="text-gray-300 hover:text-white transition flex items-center gap-2">
-            <LayoutDashboard size={16} />
-            Dashboard
-          </Link>
           <Link to="/referidos" className="text-gray-300 hover:text-white transition flex items-center gap-2">
             <Gift size={16} />
             Referidos
           </Link>
+          <Link to="/pagos" className="text-gray-300 hover:text-white transition flex items-center gap-2">
+            <CreditCard size={16} />
+            Pagos
+          </Link>
           {user.ES_MODERADOR === 'S' && (
             <>
+              <Link to="/dashboard" className="text-gray-300 hover:text-white transition flex items-center gap-2">
+                <LayoutDashboard size={16} />
+                Dashboard
+              </Link>
               <Link to="/moderacion" className="text-orange-400 hover:text-orange-300 transition flex items-center gap-2">
                 <Flag size={16} />
                 Moderación
@@ -97,14 +101,16 @@ export default function Navbar() {
                     <Heart size={16} />
                     Mis Favoritos
                   </Link>
-                  <Link
-                    to="/dashboard"
-                    onClick={() => setShowUserMenu(false)}
-                    className="flex items-center gap-3 px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white transition"
-                  >
-                    <LayoutDashboard size={16} />
-                    Mi Dashboard
-                  </Link>
+                  {user.ES_MODERADOR === 'S' && (
+                    <Link
+                      to="/dashboard"
+                      onClick={() => setShowUserMenu(false)}
+                      className="flex items-center gap-3 px-4 py-2 text-sm text-gray-300 hover:bg-gray-700 hover:text-white transition"
+                    >
+                      <LayoutDashboard size={16} />
+                      Mi Dashboard
+                    </Link>
+                  )}
                 </div>
                 <div className="border-t border-gray-700 py-1">
                   <button

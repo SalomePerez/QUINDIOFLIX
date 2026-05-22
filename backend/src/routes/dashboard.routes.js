@@ -2,6 +2,7 @@
 const router  = express.Router();
 const db      = require('../config/database');
 const { authMiddleware } = require('../middleware/auth.middleware');
+const { moderadorMiddleware } = require('../middleware/moderador.middleware');
 
 function handleDashboardError(err, res, next, viewName) {
   if (err.message && err.message.includes('ORA-00942')) {
@@ -12,34 +13,72 @@ function handleDashboardError(err, res, next, viewName) {
   next(err);
 }
 
-// GET /api/dashboard/popular — top contenido más popular (usa vista materializada)
+router.use(authMiddleware, moderadorMiddleware);
+
+// GET /api/dashboard/popular — top contenido más popular
 router.get('/popular', async (_req, res, next) => {
   try {
     const result = await db.execute(
-      `SELECT titulo, categoria, tipo, total_reproducciones,
-              calificacion_promedio, veces_en_favoritos, es_original
-       FROM MV_POPULARIDAD_CONTENIDO
-       ORDER BY total_reproducciones DESC, calificacion_promedio DESC
+      `SELECT c.titulo,
+              cat.nombre AS categoria,
+              c.tipo,
+              COUNT(r.id_reproduccion) AS total_reproducciones,
+              ROUND(NVL(AVG(cal.estrellas), 0), 2) AS calificacion_promedio,
+              COUNT(f.id_contenido) AS veces_en_favoritos,
+              c.es_original
+       FROM CONTENIDO c
+       LEFT JOIN CATEGORIAS cat ON c.id_categoria = cat.id_categoria
+       LEFT JOIN REPRODUCCIONES r ON r.id_contenido = c.id_contenido
+       LEFT JOIN CALIFICACIONES cal ON cal.id_contenido = c.id_contenido
+       LEFT JOIN FAVORITOS f ON f.id_contenido = c.id_contenido
+       GROUP BY c.titulo, cat.nombre, c.tipo, c.es_original
+       ORDER BY COUNT(r.id_reproduccion) DESC, ROUND(NVL(AVG(cal.estrellas), 0), 2) DESC
        FETCH FIRST 10 ROWS ONLY`
     );
     res.json(result.rows);
-  } catch (err) { handleDashboardError(err, res, next, 'MV_POPULARIDAD_CONTENIDO'); }
+  } catch (err) { next(err); }
 });
 
-// GET /api/dashboard/ingresos — ingresos mensuales (usa vista materializada)
+// GET /api/dashboard/ingresos — ingresos mensuales
 router.get('/ingresos', authMiddleware, async (req, res, next) => {
   const { anio = new Date().getFullYear() } = req.query;
   try {
     const result = await db.execute(
-      `SELECT ciudad, plan, mes, nombre_mes, ingresos_netos,
-              pagos_exitosos, pagos_fallidos, ticket_promedio
-       FROM MV_INGRESOS_MENSUALES
-       WHERE anio = :a
-       ORDER BY ciudad, mes, plan`,
+      `SELECT u.ciudad,
+              pl.nombre AS plan,
+              pa.periodo_mes AS mes,
+              CASE pa.periodo_mes
+                WHEN 1 THEN 'ENERO'
+                WHEN 2 THEN 'FEBRERO'
+                WHEN 3 THEN 'MARZO'
+                WHEN 4 THEN 'ABRIL'
+                WHEN 5 THEN 'MAYO'
+                WHEN 6 THEN 'JUNIO'
+                WHEN 7 THEN 'JULIO'
+                WHEN 8 THEN 'AGOSTO'
+                WHEN 9 THEN 'SEPTIEMBRE'
+                WHEN 10 THEN 'OCTUBRE'
+                WHEN 11 THEN 'NOVIEMBRE'
+                WHEN 12 THEN 'DICIEMBRE'
+                ELSE 'DESCONOCIDO'
+              END AS nombre_mes,
+              SUM(CASE WHEN pa.estado_pago='EXITOSO' THEN pa.monto ELSE 0 END) AS ingresos_netos,
+              SUM(CASE WHEN pa.estado_pago='EXITOSO' THEN 1 ELSE 0 END) AS pagos_exitosos,
+              SUM(CASE WHEN pa.estado_pago='FALLIDO' THEN 1 ELSE 0 END) AS pagos_fallidos,
+              CASE WHEN SUM(CASE WHEN pa.estado_pago='EXITOSO' THEN 1 ELSE 0 END) = 0 THEN 0
+                   ELSE ROUND(SUM(CASE WHEN pa.estado_pago='EXITOSO' THEN pa.monto ELSE 0 END) /
+                              SUM(CASE WHEN pa.estado_pago='EXITOSO' THEN 1 ELSE 0 END), 2)
+              END AS ticket_promedio
+       FROM PAGOS pa
+       JOIN USUARIOS u ON pa.id_usuario = u.id_usuario
+       JOIN PLANES pl ON u.id_plan = pl.id_plan
+       WHERE pa.periodo_anio = :a
+       GROUP BY u.ciudad, pl.nombre, pa.periodo_mes
+       ORDER BY u.ciudad, pa.periodo_mes, pl.nombre`,
       [Number(anio)]
     );
     res.json(result.rows);
-  } catch (err) { handleDashboardError(err, res, next, 'MV_INGRESOS_MENSUALES'); }
+  } catch (err) { next(err); }
 });
 
 // GET /api/dashboard/reproducciones-por-dispositivo — PIVOT dispositivos
