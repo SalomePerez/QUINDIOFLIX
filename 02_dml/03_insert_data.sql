@@ -12,6 +12,52 @@ INSERT INTO PLANES (nombre, precio_mensual, num_pantallas, calidad_video, max_pe
 VALUES ('ESTANDAR', 24900, 2, 'HD', 3);
 INSERT INTO PLANES (nombre, precio_mensual, num_pantallas, calidad_video, max_perfiles)
 VALUES ('PREMIUM', 34900, 4, '4K', 5);
+INSERT INTO PLANES (nombre, precio_mensual, num_pantallas, calidad_video, max_perfiles)
+VALUES ('FAMILIAR', 17900, 2, 'HD', 4);
+INSERT INTO PLANES (nombre, precio_mensual, num_pantallas, calidad_video, max_perfiles)
+VALUES ('EMPRESARIAL', 49900, 5, '4K', 5);
+INSERT INTO PLANES (nombre, precio_mensual, num_pantallas, calidad_video, max_perfiles)
+VALUES ('ESTUDIANTIL', 11900, 1, 'SD', 1);
+INSERT INTO PLANES (nombre, precio_mensual, num_pantallas, calidad_video, max_perfiles)
+VALUES ('ULTRA', 38900, 4, '4K', 5);
+INSERT INTO PLANES (nombre, precio_mensual, num_pantallas, calidad_video, max_perfiles)
+VALUES ('INSTITUCIONAL', 59900, 8, '4K', 10);
+INSERT INTO PLANES (nombre, precio_mensual, num_pantallas, calidad_video, max_perfiles)
+VALUES ('PLUS', 26900, 3, 'HD', 4);
+INSERT INTO PLANES (nombre, precio_mensual, num_pantallas, calidad_video, max_perfiles)
+VALUES ('PREMIUM_PLUS', 42900, 4, '4K', 5);
+INSERT INTO PLANES (nombre, precio_mensual, num_pantallas, calidad_video, max_perfiles)
+VALUES ('VIP', 54900, 5, '4K', 5);
+INSERT INTO PLANES (nombre, precio_mensual, num_pantallas, calidad_video, max_perfiles)
+VALUES ('ORO', 31900, 3, 'HD', 4);
+INSERT INTO PLANES (nombre, precio_mensual, num_pantallas, calidad_video, max_perfiles)
+VALUES ('PLATINO', 37900, 4, '4K', 5);
+INSERT INTO PLANES (nombre, precio_mensual, num_pantallas, calidad_video, max_perfiles)
+VALUES ('DIAMANTE', 45900, 5, '4K', 5);
+INSERT INTO PLANES (nombre, precio_mensual, num_pantallas, calidad_video, max_perfiles)
+VALUES ('INFINITO', 39900, 4, '4K', 5);
+INSERT INTO PLANES (nombre, precio_mensual, num_pantallas, calidad_video, max_perfiles)
+VALUES ('MAX', 32900, 3, 'HD', 4);
+INSERT INTO PLANES (nombre, precio_mensual, num_pantallas, calidad_video, max_perfiles)
+VALUES ('ESSENTIAL', 15900, 1, 'SD', 2);
+INSERT INTO PLANES (nombre, precio_mensual, num_pantallas, calidad_video, max_perfiles)
+VALUES ('CULTURA', 19900, 2, 'HD', 3);
+INSERT INTO PLANES (nombre, precio_mensual, num_pantallas, calidad_video, max_perfiles)
+VALUES ('TECH', 22900, 2, 'HD', 3);
+INSERT INTO PLANES (nombre, precio_mensual, num_pantallas, calidad_video, max_perfiles)
+VALUES ('CINE', 23900, 2, 'HD', 3);
+INSERT INTO PLANES (nombre, precio_mensual, num_pantallas, calidad_video, max_perfiles)
+VALUES ('MUSICAL', 24900, 2, 'HD', 3);
+INSERT INTO PLANES (nombre, precio_mensual, num_pantallas, calidad_video, max_perfiles)
+VALUES ('STREAMING', 26900, 3, 'HD', 4);
+INSERT INTO PLANES (nombre, precio_mensual, num_pantallas, calidad_video, max_perfiles)
+VALUES ('KIDS', 13900, 1, 'SD', 2);
+INSERT INTO PLANES (nombre, precio_mensual, num_pantallas, calidad_video, max_perfiles)
+VALUES ('FIESTA', 28900, 3, 'HD', 4);
+INSERT INTO PLANES (nombre, precio_mensual, num_pantallas, calidad_video, max_perfiles)
+VALUES ('CLASICO', 15900, 1, 'SD', 2);
+INSERT INTO PLANES (nombre, precio_mensual, num_pantallas, calidad_video, max_perfiles)
+VALUES ('RED', 17900, 2, 'HD', 3);
 
 -- -------------------------
 -- 2. CATEGORIAS
@@ -21,6 +67,26 @@ INSERT INTO CATEGORIAS (nombre, descripcion) VALUES ('SERIE', 'Contenido seriali
 INSERT INTO CATEGORIAS (nombre, descripcion) VALUES ('DOCUMENTAL', 'Documentales y reportajes');
 INSERT INTO CATEGORIAS (nombre, descripcion) VALUES ('MUSICA', 'Conciertos, videos musicales y álbumes');
 INSERT INTO CATEGORIAS (nombre, descripcion) VALUES ('PODCAST', 'Programas de audio y video en formato podcast');
+INSERT INTO CATEGORIAS (nombre, descripcion) VALUES ('ANIMACION', 'Contenido animado de diferentes estilos');
+INSERT INTO CATEGORIAS (nombre, descripcion) VALUES ('CRIMEN', 'Historias de investigación y casos policiales');
+INSERT INTO CATEGORIAS (nombre, descripcion) VALUES ('BIOGRAFIA', 'Relatos basados en la vida de personas reales');
+INSERT INTO CATEGORIAS (nombre, descripcion) VALUES ('FANTASIA', 'Mundos imaginarios y elementos sobrenaturales');
+INSERT INTO CATEGORIAS (nombre, descripcion) VALUES ('HISTORICA', 'Relatos ambientados en épocas pasadas');
+INSERT INTO CATEGORIAS (nombre, descripcion) VALUES ('POLICIACA', 'Drama centrado en fuerzas de seguridad y crímenes');
+INSERT INTO CATEGORIAS (nombre, descripcion) VALUES ('ROMANTICA', 'Historias de amor y relaciones personales');
+INSERT INTO CATEGORIAS (nombre, descripcion) VALUES ('AVENTURA', 'Acción y viaje con elementos de riesgo');
+INSERT INTO CATEGORIAS (nombre, descripcion) VALUES ('CORTOMETRAJE', 'Producciones breves y experimentales');
+INSERT INTO CATEGORIAS (nombre, descripcion) VALUES ('REALITY', 'Programas basados en situaciones reales y competencias');
+INSERT INTO CATEGORIAS (nombre, descripcion) VALUES ('CULTURA', 'Contenido sobre patrimonio, costumbres y sociedad');
+INSERT INTO CATEGORIAS (nombre, descripcion) VALUES ('NATURALEZA', 'Documentales y shows sobre la vida natural');
+INSERT INTO CATEGORIAS (nombre, descripcion) VALUES ('CIENCIA', 'Programas educativos y divulgativos');
+INSERT INTO CATEGORIAS (nombre, descripcion) VALUES ('DEPORTES', 'Competencias y vida deportiva');
+INSERT INTO CATEGORIAS (nombre, descripcion) VALUES ('INFANTIL', 'Contenido pensado para niños y familias');
+INSERT INTO CATEGORIAS (nombre, descripcion) VALUES ('DRAMA_COMEDIA', 'Historias con mezcla de comedia y drama');
+INSERT INTO CATEGORIAS (nombre, descripcion) VALUES ('SUSPENSE', 'Narrativas llenas de tensión y misterio');
+INSERT INTO CATEGORIAS (nombre, descripcion) VALUES ('TERROR_SUSPENSE', 'Terror con un alto componente de intriga');
+INSERT INTO CATEGORIAS (nombre, descripcion) VALUES ('FICCION_FAMILIAR', 'Contenido familiar con historias de ficción y valores positivos');
+INSERT INTO CATEGORIAS (nombre, descripcion) VALUES ('EXPERIMENTAL', 'Obras con formato innovador y narrativas no convencionales');
 
 -- -------------------------
 -- 3. GENEROS
@@ -37,6 +103,19 @@ INSERT INTO GENEROS (nombre) VALUES ('Musical');
 INSERT INTO GENEROS (nombre) VALUES ('Documental');
 INSERT INTO GENEROS (nombre) VALUES ('Thriller');
 INSERT INTO GENEROS (nombre) VALUES ('Aventura');
+INSERT INTO GENEROS (nombre) VALUES ('Biográfico');
+INSERT INTO GENEROS (nombre) VALUES ('Policíaco');
+INSERT INTO GENEROS (nombre) VALUES ('Fantástico');
+INSERT INTO GENEROS (nombre) VALUES ('Histórico');
+INSERT INTO GENEROS (nombre) VALUES ('Romántico');
+INSERT INTO GENEROS (nombre) VALUES ('No Ficción');
+INSERT INTO GENEROS (nombre) VALUES ('Cortometraje');
+INSERT INTO GENEROS (nombre) VALUES ('Realidad');
+INSERT INTO GENEROS (nombre) VALUES ('Cultural');
+INSERT INTO GENEROS (nombre) VALUES ('Naturaleza');
+INSERT INTO GENEROS (nombre) VALUES ('Deportes');
+INSERT INTO GENEROS (nombre) VALUES ('Crimen');
+INSERT INTO GENEROS (nombre) VALUES ('Aventura Juvenil');
 
 -- -------------------------
 -- 4. DEPARTAMENTOS
@@ -46,6 +125,26 @@ INSERT INTO DEPARTAMENTOS (nombre, descripcion) VALUES ('Contenido', 'Gestión y
 INSERT INTO DEPARTAMENTOS (nombre, descripcion) VALUES ('Marketing', 'Estrategias de adquisición y retención de usuarios');
 INSERT INTO DEPARTAMENTOS (nombre, descripcion) VALUES ('Soporte', 'Atención al cliente y resolución de incidencias');
 INSERT INTO DEPARTAMENTOS (nombre, descripcion) VALUES ('Finanzas', 'Gestión financiera y facturación');
+INSERT INTO DEPARTAMENTOS (nombre, descripcion) VALUES ('Legal', 'Asesoría jurídica y cumplimiento normativo');
+INSERT INTO DEPARTAMENTOS (nombre, descripcion) VALUES ('Recursos Humanos', 'Selección y gestión del talento');
+INSERT INTO DEPARTAMENTOS (nombre, descripcion) VALUES ('Seguridad', 'Protección de información y activos');
+INSERT INTO DEPARTAMENTOS (nombre, descripcion) VALUES ('Operaciones', 'Coordinación de procesos internos');
+INSERT INTO DEPARTAMENTOS (nombre, descripcion) VALUES ('Desarrollo de Negocio', 'Expansión comercial y alianzas estratégicas');
+INSERT INTO DEPARTAMENTOS (nombre, descripcion) VALUES ('Calidad', 'Monitoreo y mejora continua de servicios');
+INSERT INTO DEPARTAMENTOS (nombre, descripcion) VALUES ('Investigación', 'Estudios y análisis de mercado');
+INSERT INTO DEPARTAMENTOS (nombre, descripcion) VALUES ('Analítica', 'Datos y métricas para decisiones');
+INSERT INTO DEPARTAMENTOS (nombre, descripcion) VALUES ('Diseño', 'Experiencia visual y de usuario');
+INSERT INTO DEPARTAMENTOS (nombre, descripcion) VALUES ('Producción', 'Coordinación de contenidos y rodajes');
+INSERT INTO DEPARTAMENTOS (nombre, descripcion) VALUES ('Ventas', 'Comercialización y relaciones con clientes');
+INSERT INTO DEPARTAMENTOS (nombre, descripcion) VALUES ('Publicidad', 'Campañas y posicionamiento de marca');
+INSERT INTO DEPARTAMENTOS (nombre, descripcion) VALUES ('Contabilidad', 'Registro y control financiero');
+INSERT INTO DEPARTAMENTOS (nombre, descripcion) VALUES ('Gestión de Proyectos', 'Liderazgo y ejecución de iniciativas');
+INSERT INTO DEPARTAMENTOS (nombre, descripcion) VALUES ('Experiencia de Usuario', 'Diseño centrado en el usuario');
+INSERT INTO DEPARTAMENTOS (nombre, descripcion) VALUES ('Inteligencia de Datos', 'Modelos predictivos y análisis avanzado');
+INSERT INTO DEPARTAMENTOS (nombre, descripcion) VALUES ('Innovación', 'Desarrollo de nuevos productos y servicios');
+INSERT INTO DEPARTAMENTOS (nombre, descripcion) VALUES ('Relaciones Públicas', 'Comunicación con medios y comunidad');
+INSERT INTO DEPARTAMENTOS (nombre, descripcion) VALUES ('Sostenibilidad', 'Iniciativas ambientales y sociales');
+INSERT INTO DEPARTAMENTOS (nombre, descripcion) VALUES ('Exportaciones', 'Gestión de alianzas internacionales y distribución de contenidos');
 
 -- -------------------------
 -- 5. EMPLEADOS
@@ -83,6 +182,26 @@ INSERT INTO EMPLEADOS (nombre, apellido, email, telefono, cargo, fecha_ingreso, 
 VALUES ('Julián', 'Cardona', 'j.cardona@quindioflix.co', '3234567890', 'Publicador de Contenido', TO_DATE('20/02/2022','DD/MM/YYYY'), 4000000, 2, 7);
 INSERT INTO EMPLEADOS (nombre, apellido, email, telefono, cargo, fecha_ingreso, salario, id_departamento, id_supervisor)
 VALUES ('Paola', 'Agudelo', 'p.agudelo@quindioflix.co', '3245678901', 'Diseñadora de Marketing', TO_DATE('01/03/2022','DD/MM/YYYY'), 4100000, 3, 3);
+INSERT INTO EMPLEADOS (nombre, apellido, email, telefono, cargo, fecha_ingreso, salario, id_departamento, id_supervisor)
+VALUES ('Gabriela', 'Hurtado', 'g.hurtado@quindioflix.co', '3256789012', 'Desarrolladora Backend', TO_DATE('12/04/2022','DD/MM/YYYY'), 3600000, 1, 6);
+INSERT INTO EMPLEADOS (nombre, apellido, email, telefono, cargo, fecha_ingreso, salario, id_departamento, id_supervisor)
+VALUES ('Mauricio', 'Díaz', 'm.diaz@quindioflix.co', '3267890123', 'Ingeniero DevOps', TO_DATE('20/05/2022','DD/MM/YYYY'), 5400000, 1, 6);
+INSERT INTO EMPLEADOS (nombre, apellido, email, telefono, cargo, fecha_ingreso, salario, id_departamento, id_supervisor)
+VALUES ('Lucía', 'Castro', 'l.castro@quindioflix.co', '3278901234', 'Productora de Contenido', TO_DATE('10/06/2022','DD/MM/YYYY'), 4300000, 2, 7);
+INSERT INTO EMPLEADOS (nombre, apellido, email, telefono, cargo, fecha_ingreso, salario, id_departamento, id_supervisor)
+VALUES ('Bruno', 'Mejía', 'b.mejia@quindioflix.co', '3289012345', 'Diseñador Digital', TO_DATE('15/07/2022','DD/MM/YYYY'), 4100000, 2, 8);
+INSERT INTO EMPLEADOS (nombre, apellido, email, telefono, cargo, fecha_ingreso, salario, id_departamento, id_supervisor)
+VALUES ('Camila', 'Peña', 'c.pena@quindioflix.co', '3290123456', 'Analista de Datos', TO_DATE('01/08/2022','DD/MM/YYYY'), 4600000, 3, 9);
+INSERT INTO EMPLEADOS (nombre, apellido, email, telefono, cargo, fecha_ingreso, salario, id_departamento, id_supervisor)
+VALUES ('Samuel', 'Rojas', 's.rojas@quindioflix.co', '3301234567', 'Estratega de Marketing', TO_DATE('10/09/2022','DD/MM/YYYY'), 4200000, 3, 3);
+INSERT INTO EMPLEADOS (nombre, apellido, email, telefono, cargo, fecha_ingreso, salario, id_departamento, id_supervisor)
+VALUES ('Natalia', 'Suárez', 'n.suarez@quindioflix.co', '3312345678', 'Coordinadora de Soporte', TO_DATE('20/10/2022','DD/MM/YYYY'), 3900000, 4, 4);
+INSERT INTO EMPLEADOS (nombre, apellido, email, telefono, cargo, fecha_ingreso, salario, id_departamento, id_supervisor)
+VALUES ('Iván', 'Pérez', 'i.perez@quindioflix.co', '3323456789', 'Ingeniero de Soporte', TO_DATE('01/11/2022','DD/MM/YYYY'), 3950000, 4, 4);
+INSERT INTO EMPLEADOS (nombre, apellido, email, telefono, cargo, fecha_ingreso, salario, id_departamento, id_supervisor)
+VALUES ('Sara', 'López', 's.lopez@quindioflix.co', '3334567890', 'Auxiliar Contable', TO_DATE('10/12/2022','DD/MM/YYYY'), 3900000, 5, 12);
+INSERT INTO EMPLEADOS (nombre, apellido, email, telefono, cargo, fecha_ingreso, salario, id_departamento, id_supervisor)
+VALUES ('Mateo', 'Quintero', 'm.quintero@quindioflix.co', '3345678901', 'Analista de Presupuesto', TO_DATE('15/01/2023','DD/MM/YYYY'), 4200000, 5, 12);
 
 -- -------------------------
 -- 6. JEFES_DEPARTAMENTO
@@ -92,6 +211,41 @@ INSERT INTO JEFES_DEPARTAMENTO (id_departamento, id_empleado, fecha_inicio) VALU
 INSERT INTO JEFES_DEPARTAMENTO (id_departamento, id_empleado, fecha_inicio) VALUES (3, 3, TO_DATE('20/03/2020','DD/MM/YYYY'));
 INSERT INTO JEFES_DEPARTAMENTO (id_departamento, id_empleado, fecha_inicio) VALUES (4, 4, TO_DATE('05/04/2020','DD/MM/YYYY'));
 INSERT INTO JEFES_DEPARTAMENTO (id_departamento, id_empleado, fecha_inicio) VALUES (5, 5, TO_DATE('12/05/2020','DD/MM/YYYY'));
+INSERT INTO JEFES_DEPARTAMENTO (id_departamento, id_empleado, fecha_inicio) VALUES (1, 6, TO_DATE('01/01/2021','DD/MM/YYYY'));
+INSERT INTO JEFES_DEPARTAMENTO (id_departamento, id_empleado, fecha_inicio) VALUES (1, 13, TO_DATE('01/01/2022','DD/MM/YYYY'));
+INSERT INTO JEFES_DEPARTAMENTO (id_departamento, id_empleado, fecha_inicio) VALUES (1, 16, TO_DATE('01/01/2023','DD/MM/YYYY'));
+INSERT INTO JEFES_DEPARTAMENTO (id_departamento, id_empleado, fecha_inicio) VALUES (1, 17, TO_DATE('01/01/2024','DD/MM/YYYY'));
+INSERT INTO JEFES_DEPARTAMENTO (id_departamento, id_empleado, fecha_inicio) VALUES (2, 7, TO_DATE('01/02/2021','DD/MM/YYYY'));
+INSERT INTO JEFES_DEPARTAMENTO (id_departamento, id_empleado, fecha_inicio) VALUES (2, 8, TO_DATE('01/02/2022','DD/MM/YYYY'));
+INSERT INTO JEFES_DEPARTAMENTO (id_departamento, id_empleado, fecha_inicio) VALUES (2, 14, TO_DATE('01/02/2023','DD/MM/YYYY'));
+INSERT INTO JEFES_DEPARTAMENTO (id_departamento, id_empleado, fecha_inicio) VALUES (2, 18, TO_DATE('01/02/2024','DD/MM/YYYY'));
+INSERT INTO JEFES_DEPARTAMENTO (id_departamento, id_empleado, fecha_inicio) VALUES (3, 9, TO_DATE('01/03/2021','DD/MM/YYYY'));
+INSERT INTO JEFES_DEPARTAMENTO (id_departamento, id_empleado, fecha_inicio) VALUES (3, 15, TO_DATE('01/03/2022','DD/MM/YYYY'));
+INSERT INTO JEFES_DEPARTAMENTO (id_departamento, id_empleado, fecha_inicio) VALUES (3, 20, TO_DATE('01/03/2023','DD/MM/YYYY'));
+INSERT INTO JEFES_DEPARTAMENTO (id_departamento, id_empleado, fecha_inicio) VALUES (3, 21, TO_DATE('01/03/2024','DD/MM/YYYY'));
+INSERT INTO JEFES_DEPARTAMENTO (id_departamento, id_empleado, fecha_inicio) VALUES (4, 10, TO_DATE('01/04/2021','DD/MM/YYYY'));
+INSERT INTO JEFES_DEPARTAMENTO (id_departamento, id_empleado, fecha_inicio) VALUES (4, 11, TO_DATE('01/04/2022','DD/MM/YYYY'));
+INSERT INTO JEFES_DEPARTAMENTO (id_departamento, id_empleado, fecha_inicio) VALUES (4, 22, TO_DATE('01/04/2023','DD/MM/YYYY'));
+INSERT INTO JEFES_DEPARTAMENTO (id_departamento, id_empleado, fecha_inicio) VALUES (4, 23, TO_DATE('01/04/2024','DD/MM/YYYY'));
+INSERT INTO JEFES_DEPARTAMENTO (id_departamento, id_empleado, fecha_inicio) VALUES (5, 12, TO_DATE('01/05/2021','DD/MM/YYYY'));
+INSERT INTO JEFES_DEPARTAMENTO (id_departamento, id_empleado, fecha_inicio) VALUES (5, 24, TO_DATE('01/05/2022','DD/MM/YYYY'));
+INSERT INTO JEFES_DEPARTAMENTO (id_departamento, id_empleado, fecha_inicio) VALUES (5, 25, TO_DATE('01/05/2023','DD/MM/YYYY'));
+INSERT INTO JEFES_DEPARTAMENTO (id_departamento, id_empleado, fecha_inicio) VALUES (5, 20, TO_DATE('01/05/2024','DD/MM/YYYY'));
+INSERT INTO JEFES_DEPARTAMENTO (id_departamento, id_empleado, fecha_inicio) VALUES (1, 18, TO_DATE('01/01/2025','DD/MM/YYYY'));
+INSERT INTO JEFES_DEPARTAMENTO (id_departamento, id_empleado, fecha_inicio) VALUES (1, 19, TO_DATE('01/01/2026','DD/MM/YYYY'));
+INSERT INTO JEFES_DEPARTAMENTO (id_departamento, id_empleado, fecha_inicio) VALUES (1, 20, TO_DATE('01/01/2027','DD/MM/YYYY'));
+INSERT INTO JEFES_DEPARTAMENTO (id_departamento, id_empleado, fecha_inicio) VALUES (2, 13, TO_DATE('01/02/2025','DD/MM/YYYY'));
+INSERT INTO JEFES_DEPARTAMENTO (id_departamento, id_empleado, fecha_inicio) VALUES (2, 17, TO_DATE('01/02/2026','DD/MM/YYYY'));
+INSERT INTO JEFES_DEPARTAMENTO (id_departamento, id_empleado, fecha_inicio) VALUES (2, 24, TO_DATE('01/02/2027','DD/MM/YYYY'));
+INSERT INTO JEFES_DEPARTAMENTO (id_departamento, id_empleado, fecha_inicio) VALUES (3, 16, TO_DATE('01/03/2025','DD/MM/YYYY'));
+INSERT INTO JEFES_DEPARTAMENTO (id_departamento, id_empleado, fecha_inicio) VALUES (3, 22, TO_DATE('01/03/2026','DD/MM/YYYY'));
+INSERT INTO JEFES_DEPARTAMENTO (id_departamento, id_empleado, fecha_inicio) VALUES (3, 23, TO_DATE('01/03/2027','DD/MM/YYYY'));
+INSERT INTO JEFES_DEPARTAMENTO (id_departamento, id_empleado, fecha_inicio) VALUES (4, 5, TO_DATE('01/04/2025','DD/MM/YYYY'));
+INSERT INTO JEFES_DEPARTAMENTO (id_departamento, id_empleado, fecha_inicio) VALUES (4, 12, TO_DATE('01/04/2026','DD/MM/YYYY'));
+INSERT INTO JEFES_DEPARTAMENTO (id_departamento, id_empleado, fecha_inicio) VALUES (4, 25, TO_DATE('01/04/2027','DD/MM/YYYY'));
+INSERT INTO JEFES_DEPARTAMENTO (id_departamento, id_empleado, fecha_inicio) VALUES (5, 1, TO_DATE('01/05/2025','DD/MM/YYYY'));
+INSERT INTO JEFES_DEPARTAMENTO (id_departamento, id_empleado, fecha_inicio) VALUES (5, 2, TO_DATE('01/05/2026','DD/MM/YYYY'));
+INSERT INTO JEFES_DEPARTAMENTO (id_departamento, id_empleado, fecha_inicio) VALUES (5, 3, TO_DATE('01/05/2027','DD/MM/YYYY'));
 
 COMMIT;
 
@@ -237,6 +391,66 @@ VALUES (9, 1, 'OTRO', 'Misma productora, estilo similar de thriller de acción')
 -- Misterios de Colombia relacionado con Historias de Colombia
 INSERT INTO CONTENIDO_RELACIONADO (id_contenido_origen, id_contenido_destino, tipo_relacion, descripcion)
 VALUES (40, 36, 'OTRO', 'Ambos podcasts exploran la historia y cultura colombiana');
+INSERT INTO CONTENIDO_RELACIONADO (id_contenido_origen, id_contenido_destino, tipo_relacion, descripcion)
+VALUES (1, 9, 'OTRO', 'El Último Vuelo comparte temática de acción con Código Rojo');
+INSERT INTO CONTENIDO_RELACIONADO (id_contenido_origen, id_contenido_destino, tipo_relacion, descripcion)
+VALUES (2, 5, 'OTRO', 'Amor en Cartagena y Noche de Brujas exploran nocturnidad y romance urbano');
+INSERT INTO CONTENIDO_RELACIONADO (id_contenido_origen, id_contenido_destino, tipo_relacion, descripcion)
+VALUES (3, 11, 'OTRO', 'La Sombra del Cóndor comparte tensión con Abismo');
+INSERT INTO CONTENIDO_RELACIONADO (id_contenido_origen, id_contenido_destino, tipo_relacion, descripcion)
+VALUES (4, 8, 'OTRO', 'Pequeños Gigantes y Cumbia Eterna combinan familia y música colombiana');
+INSERT INTO CONTENIDO_RELACIONADO (id_contenido_origen, id_contenido_destino, tipo_relacion, descripcion)
+VALUES (5, 2, 'OTRO', 'Noche de Brujas y Amor en Cartagena usan escenarios urbanos similares');
+INSERT INTO CONTENIDO_RELACIONADO (id_contenido_origen, id_contenido_destino, tipo_relacion, descripcion)
+VALUES (6, 11, 'OTRO', 'Galaxia Perdida y Abismo comparten aventura y tensión espacial');
+INSERT INTO CONTENIDO_RELACIONADO (id_contenido_origen, id_contenido_destino, tipo_relacion, descripcion)
+VALUES (10, 11, 'OTRO', 'La Fiesta del Pueblo y Abismo son estrenos del mismo estudio');
+INSERT INTO CONTENIDO_RELACIONADO (id_contenido_origen, id_contenido_destino, tipo_relacion, descripcion)
+VALUES (13, 14, 'OTRO', 'Los Cafeteros y Medellín Noir tienen fuerte identidad local colombiana');
+INSERT INTO CONTENIDO_RELACIONADO (id_contenido_origen, id_contenido_destino, tipo_relacion, descripcion)
+VALUES (14, 19, 'PRECUELA', 'Medellín Noir es antecedente directo de Medellín Noir: El Cartel');
+INSERT INTO CONTENIDO_RELACIONADO (id_contenido_origen, id_contenido_destino, tipo_relacion, descripcion)
+VALUES (15, 22, 'SPIN_OFF', 'Ciberpatrulla: Nueva Generación retoma personajes de la serie original');
+INSERT INTO CONTENIDO_RELACIONADO (id_contenido_origen, id_contenido_destino, tipo_relacion, descripcion)
+VALUES (16, 21, 'OTRO', 'Bogotá 2050 y El Ministerio del Tiempo CO comparten ciencia ficción');
+INSERT INTO CONTENIDO_RELACIONADO (id_contenido_origen, id_contenido_destino, tipo_relacion, descripcion)
+VALUES (17, 23, 'OTRO', 'Risas del Pacífico y Colombia Salvaje conectan cultura y territorio');
+INSERT INTO CONTENIDO_RELACIONADO (id_contenido_origen, id_contenido_destino, tipo_relacion, descripcion)
+VALUES (18, 29, 'OTRO', 'La Clínica y La Paz Posible comparten enfoque social y humano');
+INSERT INTO CONTENIDO_RELACIONADO (id_contenido_origen, id_contenido_destino, tipo_relacion, descripcion)
+VALUES (20, 25, 'OTRO', 'Selva Viva y Ríos de Vida son documentales de naturaleza colombiana');
+INSERT INTO CONTENIDO_RELACIONADO (id_contenido_origen, id_contenido_destino, tipo_relacion, descripcion)
+VALUES (21, 22, 'OTRO', 'El Ministerio del Tiempo CO y Ciberpatrulla NG son series originales');
+INSERT INTO CONTENIDO_RELACIONADO (id_contenido_origen, id_contenido_destino, tipo_relacion, descripcion)
+VALUES (23, 24, 'OTRO', 'Colombia Salvaje y El Café Nuestro son documentales sobre patrimonio nacional');
+INSERT INTO CONTENIDO_RELACIONADO (id_contenido_origen, id_contenido_destino, tipo_relacion, descripcion)
+VALUES (24, 25, 'OTRO', 'El Café Nuestro y Ríos de Vida combinan historia y ecosistemas');
+INSERT INTO CONTENIDO_RELACIONADO (id_contenido_origen, id_contenido_destino, tipo_relacion, descripcion)
+VALUES (26, 27, 'OTRO', 'Cumbia: Raíces y Ritmo y Mujeres que Construyen son producciones culturales');
+INSERT INTO CONTENIDO_RELACIONADO (id_contenido_origen, id_contenido_destino, tipo_relacion, descripcion)
+VALUES (27, 28, 'OTRO', 'Mujeres que Construyen y Colombia Salvaje: Océanos se enfocan en territorio y sociedad');
+INSERT INTO CONTENIDO_RELACIONADO (id_contenido_origen, id_contenido_destino, tipo_relacion, descripcion)
+VALUES (29, 30, 'OTRO', 'La Paz Posible y Gastronomía Colombiana son documentales educativos');
+INSERT INTO CONTENIDO_RELACIONADO (id_contenido_origen, id_contenido_destino, tipo_relacion, descripcion)
+VALUES (30, 31, 'OTRO', 'Gastronomía Colombiana y Concierto Vallenato celebran cultura local');
+INSERT INTO CONTENIDO_RELACIONADO (id_contenido_origen, id_contenido_destino, tipo_relacion, descripcion)
+VALUES (31, 32, 'OTRO', 'Concierto Vallenato y Beats Colombianos son eventos musicales en pantalla');
+INSERT INTO CONTENIDO_RELACIONADO (id_contenido_origen, id_contenido_destino, tipo_relacion, descripcion)
+VALUES (32, 33, 'OTRO', 'Beats Colombianos y Trova Paisa comparten música popular contemporánea');
+INSERT INTO CONTENIDO_RELACIONADO (id_contenido_origen, id_contenido_destino, tipo_relacion, descripcion)
+VALUES (33, 34, 'OTRO', 'Trova Paisa y Salsa Caleña son shows de música tradicional colombiana');
+INSERT INTO CONTENIDO_RELACIONADO (id_contenido_origen, id_contenido_destino, tipo_relacion, descripcion)
+VALUES (34, 35, 'OTRO', 'Salsa Caleña e Indie Colombia representan géneros musicales diferentes');
+INSERT INTO CONTENIDO_RELACIONADO (id_contenido_origen, id_contenido_destino, tipo_relacion, descripcion)
+VALUES (35, 39, 'OTRO', 'Indie Colombia y Ciencia para Todos mezclan arte con divulgación');
+INSERT INTO CONTENIDO_RELACIONADO (id_contenido_origen, id_contenido_destino, tipo_relacion, descripcion)
+VALUES (36, 37, 'OTRO', 'Historias de Colombia y Tech Quindío son podcasts de actualidad');
+INSERT INTO CONTENIDO_RELACIONADO (id_contenido_origen, id_contenido_destino, tipo_relacion, descripcion)
+VALUES (37, 38, 'OTRO', 'Tech Quindío y Emprendimiento CO son voces sobre innovación');
+INSERT INTO CONTENIDO_RELACIONADO (id_contenido_origen, id_contenido_destino, tipo_relacion, descripcion)
+VALUES (38, 39, 'OTRO', 'Emprendimiento CO y Ciencia para Todos combinan emprendimiento y aprendizaje');
+INSERT INTO CONTENIDO_RELACIONADO (id_contenido_origen, id_contenido_destino, tipo_relacion, descripcion)
+VALUES (39, 40, 'OTRO', 'Ciencia para Todos y Misterios de Colombia son podcasts informativos');
 
 COMMIT;
 
@@ -331,6 +545,19 @@ INSERT INTO TEMPORADAS (id_contenido, numero, titulo, anio) VALUES (22, 1, 'Cibe
 INSERT INTO TEMPORADAS (id_contenido, numero, titulo, anio) VALUES (36, 1, 'Historias de Colombia - Temporada 1', 2021);
 INSERT INTO TEMPORADAS (id_contenido, numero, titulo, anio) VALUES (37, 1, 'Tech Quindío - Temporada 1', 2022);
 INSERT INTO TEMPORADAS (id_contenido, numero, titulo, anio) VALUES (38, 1, 'Emprendimiento CO - Temporada 1', 2023);
+INSERT INTO TEMPORADAS (id_contenido, numero, titulo, anio) VALUES (13, 3, 'Los Cafeteros - Temporada 3', 2023);
+INSERT INTO TEMPORADAS (id_contenido, numero, titulo, anio) VALUES (14, 3, 'Medellín Noir - Temporada 3', 2024);
+INSERT INTO TEMPORADAS (id_contenido, numero, titulo, anio) VALUES (15, 2, 'Ciberpatrulla - Temporada 2', 2024);
+INSERT INTO TEMPORADAS (id_contenido, numero, titulo, anio) VALUES (16, 2, 'Bogotá 2050 - Temporada 2', 2025);
+INSERT INTO TEMPORADAS (id_contenido, numero, titulo, anio) VALUES (17, 2, 'Risas del Pacífico - Temporada 2', 2023);
+INSERT INTO TEMPORADAS (id_contenido, numero, titulo, anio) VALUES (18, 2, 'La Clínica - Temporada 2', 2024);
+INSERT INTO TEMPORADAS (id_contenido, numero, titulo, anio) VALUES (19, 2, 'Medellín Noir: El Cartel - Temporada 2', 2025);
+INSERT INTO TEMPORADAS (id_contenido, numero, titulo, anio) VALUES (20, 2, 'Selva Viva - Temporada 2', 2023);
+INSERT INTO TEMPORADAS (id_contenido, numero, titulo, anio) VALUES (21, 2, 'El Ministerio del Tiempo CO - Temporada 2', 2026);
+INSERT INTO TEMPORADAS (id_contenido, numero, titulo, anio) VALUES (22, 2, 'Ciberpatrulla NG - Temporada 2', 2026);
+INSERT INTO TEMPORADAS (id_contenido, numero, titulo, anio) VALUES (36, 2, 'Historias de Colombia - Temporada 2', 2022);
+INSERT INTO TEMPORADAS (id_contenido, numero, titulo, anio) VALUES (37, 2, 'Tech Quindío - Temporada 2', 2023);
+INSERT INTO TEMPORADAS (id_contenido, numero, titulo, anio) VALUES (38, 2, 'Emprendimiento CO - Temporada 2', 2024);
 
 COMMIT;
 

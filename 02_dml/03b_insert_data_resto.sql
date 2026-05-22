@@ -199,6 +199,34 @@ INSERT INTO REPORTES (id_perfil, id_contenido, motivo, descripcion, estado)
 VALUES (22, 5, 'Contenido inapropiado', 'Muy perturbador para ver en familia.', 'PENDIENTE');
 INSERT INTO REPORTES (id_perfil, id_contenido, motivo, descripcion, estado, id_moderador, fecha_resolucion, resolucion_nota)
 VALUES (29, 14, 'Lenguaje ofensivo', 'Lenguaje muy fuerte en todos los episodios.', 'RESUELTO', 3, TO_DATE('01/03/2026','DD/MM/YYYY'), 'Serie clasificada +18. El lenguaje es coherente con la clasificación. Reporte cerrado.');
+INSERT INTO REPORTES (id_perfil, id_contenido, motivo, descripcion, estado)
+VALUES (1, 4, 'Descripción incorrecta', 'La sinopsis no coincide con el contenido mostrado.', 'EN_REVISION');
+INSERT INTO REPORTES (id_perfil, id_contenido, motivo, descripcion, estado)
+VALUES (2, 6, 'Contenido inapropiado', 'Escenas de violencia sin advertencia adecuada.', 'PENDIENTE');
+INSERT INTO REPORTES (id_perfil, id_contenido, motivo, descripcion, estado, id_moderador, fecha_resolucion, resolucion_nota)
+VALUES (3, 7, 'Lenguaje ofensivo', 'Uso excesivo de malas palabras en escena.', 'RESUELTO', 1, TO_DATE('05/03/2026','DD/MM/YYYY'), 'Contenido clasificado +16 es válido para el lenguaje empleado.');
+INSERT INTO REPORTES (id_perfil, id_contenido, motivo, descripcion, estado)
+VALUES (5, 18, 'Información incorrecta', 'El documental no respeta la fecha indicada en la sinopsis.', 'EN_REVISION');
+INSERT INTO REPORTES (id_perfil, id_contenido, motivo, descripcion, estado)
+VALUES (6, 23, 'Contenido inapropiado', 'No debería estar disponible para menores.', 'PENDIENTE');
+INSERT INTO REPORTES (id_perfil, id_contenido, motivo, descripcion, estado, id_moderador, fecha_resolucion, resolucion_nota)
+VALUES (8, 25, 'Contenido inapropiado', 'Demasiado explícito para clasificación actual.', 'RECHAZADO', 2, TO_DATE('10/03/2026','DD/MM/YYYY'), 'La clasificación es correcta; el contenido es ficción.');
+INSERT INTO REPORTES (id_perfil, id_contenido, motivo, descripcion, estado)
+VALUES (9, 14, 'Lenguaje ofensivo', 'Uso de insultos en más del 50% de los episodios.', 'EN_REVISION');
+INSERT INTO REPORTES (id_perfil, id_contenido, motivo, descripcion, estado)
+VALUES (12, 11, 'Información incorrecta', 'El título no coincide con la sinopsis.', 'PENDIENTE');
+INSERT INTO REPORTES (id_perfil, id_contenido, motivo, descripcion, estado, id_moderador, fecha_resolucion, resolucion_nota)
+VALUES (14, 19, 'Contenido inapropiado', 'El tema de violencia es demasiado explícito para menores.', 'RESUELTO', 3, TO_DATE('15/03/2026','DD/MM/YYYY'), 'Clasificación +18 es adecuada. Reporte cerrado.');
+INSERT INTO REPORTES (id_perfil, id_contenido, motivo, descripcion, estado)
+VALUES (17, 30, 'Información incorrecta', 'El documental presenta datos descontextualizados.', 'EN_REVISION');
+INSERT INTO REPORTES (id_perfil, id_contenido, motivo, descripcion, estado, id_moderador, fecha_resolucion, resolucion_nota)
+VALUES (19, 32, 'Contenido inapropiado', 'El podcast tiene lenguaje soez sin clasificación.', 'RESUELTO', 1, TO_DATE('20/03/2026','DD/MM/YYYY'), 'Se evaluó y no requiere cambio de clasificación.');
+INSERT INTO REPORTES (id_perfil, id_contenido, motivo, descripcion, estado)
+VALUES (21, 27, 'Contenido inapropiado', 'Contenido demasiado explícito para menores.', 'PENDIENTE');
+INSERT INTO REPORTES (id_perfil, id_contenido, motivo, descripcion, estado)
+VALUES (24, 13, 'Información incorrecta', 'La descripción no incluye la temática principal.', 'EN_REVISION');
+INSERT INTO REPORTES (id_perfil, id_contenido, motivo, descripcion, estado, id_moderador, fecha_resolucion, resolucion_nota)
+VALUES (26, 1, 'Descripción incorrecta', 'Se corrigió la sinopsis para mayor precisión.', 'RESUELTO', 2, TO_DATE('25/03/2026','DD/MM/YYYY'), 'Sinopsis actualizada. Reporte cerrado.');
 
 COMMIT;
 
@@ -225,6 +253,36 @@ INSERT INTO HISTORIAL_PLANES (id_usuario, id_plan_ant, id_plan_nuevo, fecha_camb
 VALUES (30, 2, 1, TO_DATE('01/11/2025','DD/MM/YYYY'), 'Ajuste de presupuesto');
 INSERT INTO HISTORIAL_PLANES (id_usuario, id_plan_ant, id_plan_nuevo, fecha_cambio, motivo)
 VALUES (19, 2, 3, TO_DATE('01/12/2025','DD/MM/YYYY'), 'Upgrade a Premium por Black Friday');
+INSERT INTO HISTORIAL_PLANES (id_usuario, id_plan_ant, id_plan_nuevo, fecha_cambio, motivo)
+VALUES (1, 1, 3, TO_DATE('05/01/2025','DD/MM/YYYY'), 'Más calidad para ver en familia');
+INSERT INTO HISTORIAL_PLANES (id_usuario, id_plan_ant, id_plan_nuevo, fecha_cambio, motivo)
+VALUES (2, 2, 5, TO_DATE('10/01/2025','DD/MM/YYYY'), 'Cambio a plan empresarial para equipo de trabajo');
+INSERT INTO HISTORIAL_PLANES (id_usuario, id_plan_ant, id_plan_nuevo, fecha_cambio, motivo)
+VALUES (3, 3, 4, TO_DATE('20/01/2025','DD/MM/YYYY'), 'Necesitaba más pantallas para invitados');
+INSERT INTO HISTORIAL_PLANES (id_usuario, id_plan_ant, id_plan_nuevo, fecha_cambio, motivo)
+VALUES (5, 1, 2, TO_DATE('01/02/2025','DD/MM/YYYY'), 'Upgrade para ver en HD');
+INSERT INTO HISTORIAL_PLANES (id_usuario, id_plan_ant, id_plan_nuevo, fecha_cambio, motivo)
+VALUES (6, 2, 4, TO_DATE('15/02/2025','DD/MM/YYYY'), 'Mejor calidad de video');
+INSERT INTO HISTORIAL_PLANES (id_usuario, id_plan_ant, id_plan_nuevo, fecha_cambio, motivo)
+VALUES (7, 4, 5, TO_DATE('01/03/2025','DD/MM/YYYY'), 'Plan corporativo para equipo');
+INSERT INTO HISTORIAL_PLANES (id_usuario, id_plan_ant, id_plan_nuevo, fecha_cambio, motivo)
+VALUES (9, 1, 4, TO_DATE('10/03/2025','DD/MM/YYYY'), 'Planeo ver más contenido 4K');
+INSERT INTO HISTORIAL_PLANES (id_usuario, id_plan_ant, id_plan_nuevo, fecha_cambio, motivo)
+VALUES (11, 3, 5, TO_DATE('20/03/2025','DD/MM/YYYY'), 'Necesito más cuentas para la familia');
+INSERT INTO HISTORIAL_PLANES (id_usuario, id_plan_ant, id_plan_nuevo, fecha_cambio, motivo)
+VALUES (12, 2, 1, TO_DATE('01/04/2025','DD/MM/YYYY'), 'Reducción temporal de costo');
+INSERT INTO HISTORIAL_PLANES (id_usuario, id_plan_ant, id_plan_nuevo, fecha_cambio, motivo)
+VALUES (14, 1, 2, TO_DATE('10/04/2025','DD/MM/YYYY'), 'Promoción de familia');
+INSERT INTO HISTORIAL_PLANES (id_usuario, id_plan_ant, id_plan_nuevo, fecha_cambio, motivo)
+VALUES (15, 2, 3, TO_DATE('20/04/2025','DD/MM/YYYY'), 'Subida a Premium por uso frecuente');
+INSERT INTO HISTORIAL_PLANES (id_usuario, id_plan_ant, id_plan_nuevo, fecha_cambio, motivo)
+VALUES (18, 1, 3, TO_DATE('01/05/2025','DD/MM/YYYY'), 'Mejor experiencia para ver series');
+INSERT INTO HISTORIAL_PLANES (id_usuario, id_plan_ant, id_plan_nuevo, fecha_cambio, motivo)
+VALUES (21, 3, 4, TO_DATE('10/05/2025','DD/MM/YYYY'), 'Necesitaba más pantallas simultáneas');
+INSERT INTO HISTORIAL_PLANES (id_usuario, id_plan_ant, id_plan_nuevo, fecha_cambio, motivo)
+VALUES (24, 2, 3, TO_DATE('20/05/2025','DD/MM/YYYY'), 'Mayor calidad de reproducción');
+INSERT INTO HISTORIAL_PLANES (id_usuario, id_plan_ant, id_plan_nuevo, fecha_cambio, motivo)
+VALUES (28, 1, 2, TO_DATE('01/06/2025','DD/MM/YYYY'), 'Cambio para compartir con la familia');
 
 COMMIT;
 

@@ -16,7 +16,7 @@ CREATE TABLE PLANES (
     num_pantallas    NUMBER(1)      NOT NULL,
     calidad_video    VARCHAR2(10)   NOT NULL,
     max_perfiles     NUMBER(1)      NOT NULL,
-    CONSTRAINT chk_plan_nombre    CHECK (nombre IN ('BASICO','ESTANDAR','PREMIUM')),
+    CONSTRAINT chk_plan_nombre    CHECK (nombre IN ('BASICO','ESTANDAR','PREMIUM','FAMILIAR','EMPRESARIAL','ESTUDIANTIL','ULTRA','INSTITUCIONAL','PLUS','PREMIUM_PLUS','VIP','ORO','PLATINO','DIAMANTE','INFINITO','MAX','ESSENTIAL','CULTURA','TECH','CINE','MUSICAL','STREAMING','KIDS','FIESTA','RED')),
     CONSTRAINT chk_plan_precio    CHECK (precio_mensual > 0),
     CONSTRAINT chk_plan_pantallas CHECK (num_pantallas BETWEEN 1 AND 4),
     CONSTRAINT chk_plan_calidad   CHECK (calidad_video IN ('SD','HD','4K')),
